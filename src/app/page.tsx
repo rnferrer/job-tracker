@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -13,7 +14,9 @@ export default function Home() {
           all of your applications in one place. Keep track of job postings, interview dates,
           and company's information.
         </p>
-        <Button>Get started</Button>
+        <Link href='/sign-up'>
+          <Button>Get started</Button>
+        </Link>
       </div>
     </div>
   );
