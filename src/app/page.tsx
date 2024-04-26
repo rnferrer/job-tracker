@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 
-export default function Home() {
+export default function Landing() {
   return (
     <div className="w-screen h-screen flex justify-center items-center text-black">
       <div className="w-full max-w-[600px]"> 
