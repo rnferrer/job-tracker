@@ -6,15 +6,18 @@ import {
   NavigationMenuList, 
   navigationMenuTriggerStyle 
 } from "@/components/ui/navigation-menu";
-import { Tabs } from "@/components/ui/tabs";
-
+import { 
+  Tabs, 
+  TabsContent, 
+  TabsList, 
+  TabsTrigger  
+} from "@/components/ui/tabs";
 import {
   SignedIn,
   SignedOut,
   SignInButton,
   UserButton
 } from "@clerk/nextjs"
-import { TabsContent, TabsList, TabsTrigger } from "@radix-ui/react-tabs";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -38,15 +41,31 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <nav className="mt-[2.5rem]">
         <Tabs className="w-[1000px]">
           <TabsList className="grid w-[50%] grid-cols-4">
-            <TabsTrigger value="home">Home</TabsTrigger>
-            <TabsTrigger value="applied">Applied</TabsTrigger>
-            <TabsTrigger value="saved">Saved Jobs</TabsTrigger>
-            <TabsTrigger value="interviews">Interviews</TabsTrigger>
+            <Link href="home" >
+              <TabsTrigger value="home" className="w-full">
+                Home
+              </TabsTrigger>
+            </Link>
+            <Link href="applied" >
+              <TabsTrigger value="applied" className="w-full">
+                Applied
+              </TabsTrigger>
+            </Link>
+            <Link href="saved">
+              <TabsTrigger value="saved" className="w-full">
+                Saved
+              </TabsTrigger>
+            </Link>
+            <Link href="interviews" >
+              <TabsTrigger value="interviews" className="w-full">
+                Applied
+              </TabsTrigger>
+            </Link>
           </TabsList>
-          <TabsContent value="home">home</TabsContent>
-          <TabsContent value="applied">hello</TabsContent>
-          <TabsContent value="saved">saved</TabsContent>
-          <TabsContent value="interviews">intervews</TabsContent>
+          <TabsContent value="home"></TabsContent>
+          <TabsContent value="applied"></TabsContent>
+          <TabsContent value="saved"></TabsContent>
+          <TabsContent value="interviews"></TabsContent>
         </Tabs>
       </nav>
  
