@@ -58,7 +58,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </Link>
             <Link href="interviews" >
               <TabsTrigger value="interviews" className="w-full">
-                Applied
+                Interviews
               </TabsTrigger>
             </Link>
           </TabsList>
