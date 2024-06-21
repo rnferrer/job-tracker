@@ -6,10 +6,29 @@ import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 
 const applicationSchema = z.object({
-  title: z.string().min(2).max(50),
-  company: z.string().min(2).max(50),
-  link: z.string().url(),
-  location: z.string().min(2).max(50)
+  title: z.string()
+    .min(2,{
+      message: "Position name must be at least 2 characters.",
+    }).max(50, {
+      message: "Position name must not be longer than 50 characters.",
+    }),
+  company: z.string()  
+    .min(2,{
+      message: "Company name must be at least 2 characters.",
+    }).max(50, {
+      message: "Company name must not be longer than 50 characters.",
+    }),
+  link: z.string()
+    .url(
+      { message: "Invalid url" 
+
+      }),
+  location: z.string()  
+    .min(2,{
+      message: "Location must be at least 2 characters.",
+    }).max(50, {
+      message: "Location must not be longer than 50 characters.",
+    }),
 })
 
 const ApplicationForm = () => {
@@ -26,17 +45,7 @@ const ApplicationForm = () => {
     console.log(values)
   }
   return(
-    <div >
-      {/* <form className="flex flex-col">
-        <label>Position Name</label>
-        <input/>
-        <label>Company Name</label>
-        <input/>
-        <label>Job Posting Link</label>
-        <input/>
-        <label>Location of Job</label>
-        <input/>
-      </form> */}
+    <div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -47,7 +56,7 @@ const ApplicationForm = () => {
               <FormItem>
                 <FormLabel>Position Name</FormLabel>
                 <FormControl>
-                  <Input/>
+                  <Input {...field}/>
                 </FormControl>
               </FormItem>
             )}/>
@@ -58,7 +67,7 @@ const ApplicationForm = () => {
               <FormItem>
                 <FormLabel>Company Name</FormLabel>
                 <FormControl>
-                  <Input/>
+                  <Input {...field}/>
                 </FormControl>
               </FormItem>
           )}/>
@@ -69,7 +78,7 @@ const ApplicationForm = () => {
               <FormItem>
                 <FormLabel>Job Post URL</FormLabel>
                 <FormControl>
-                  <Input/>
+                  <Input {...field}/>
                 </FormControl>
               </FormItem>
           )}/>
@@ -80,7 +89,7 @@ const ApplicationForm = () => {
               <FormItem>
                 <FormLabel>Location</FormLabel>
                 <FormControl>
-                  <Input/>
+                  <Input {...field}/>
                 </FormControl>
               </FormItem>
           )}/>

@@ -122,7 +122,7 @@ const AppliedPage = () => {
         </TableBody>
       </Table>
       <Dialog>
-        <DialogTrigger className="absolute">
+        <DialogTrigger asChild>
           <Button>Add New Application</Button>
         </DialogTrigger>
         <DialogContent>
@@ -130,7 +130,9 @@ const AppliedPage = () => {
             <DialogTitle>
               Add a new job you have applied to
             </DialogTitle>
-            <DialogDescription>Input information about the job such as the title, company name, and location of where the position is held.</DialogDescription>
+            <DialogDescription>
+              Input information about the job such as the title, company name, and location of where the position is held.
+            </DialogDescription>
           </DialogHeader>
           <ApplicationForm/>
         </DialogContent>
