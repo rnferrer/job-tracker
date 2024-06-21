@@ -2,7 +2,14 @@
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { 
+  Dialog, 
+  DialogContent,
+  DialogDescription, 
+  DialogHeader, 
+  DialogTitle,
+  DialogTrigger 
+} from "@/components/ui/dialog"
 import { 
   Table, 
   TableBody, 
@@ -82,10 +89,11 @@ const DummyJobsList = [
 ]
 
 
-
 const AppliedPage = () => {
+  
   return(
     <div className="relative">
+      
       <Table>
         <TableHeader>
           <TableRow>
@@ -107,6 +115,7 @@ const AppliedPage = () => {
               <TableCell>{job.role}</TableCell>
               <TableCell>{job.company}</TableCell>
               <TableCell>{job.job_link}</TableCell>
+              {/* for the link we can add an icon instead of the domain name of the url */}
               <TableCell>{job.location}</TableCell>
             </TableRow>
           ))}
@@ -117,6 +126,12 @@ const AppliedPage = () => {
           <Button>Add New Application</Button>
         </DialogTrigger>
         <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              Add a new job you have applied to
+            </DialogTitle>
+            <DialogDescription>Input information about the job such as the title, company name, and location of where the position is held.</DialogDescription>
+          </DialogHeader>
           <ApplicationForm/>
         </DialogContent>
       </Dialog>
