@@ -1,6 +1,8 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { 
   Table, 
   TableBody, 
@@ -9,6 +11,8 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table"
+
+import  ApplicationForm  from "@/components/ApplicationForm"
 
 const DummyJobsList = [
   {
@@ -81,7 +85,7 @@ const DummyJobsList = [
 
 const AppliedPage = () => {
   return(
-    <div>
+    <div className="relative">
       <Table>
         <TableHeader>
           <TableRow>
@@ -94,8 +98,8 @@ const AppliedPage = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {DummyJobsList.map((job)=>(
-            <TableRow>
+          {DummyJobsList.map((job, i)=>(
+            <TableRow key={i}>
               <TableCell>{job.last_edited}</TableCell>
               <TableCell>
                 <Badge>{job.status}</Badge>
@@ -108,6 +112,14 @@ const AppliedPage = () => {
           ))}
         </TableBody>
       </Table>
+      <Dialog>
+        <DialogTrigger className="absolute">
+          <Button>Add New Application</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <ApplicationForm/>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
