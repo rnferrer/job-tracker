@@ -35,7 +35,7 @@ const ApplicationForm = () => {
   const form = useForm<z.infer<typeof applicationSchema>>({
     resolver: zodResolver(applicationSchema),
     defaultValues:{
-      title:"",
+      title:null,
       company:"",
       link:"",
       location:""
