@@ -18,7 +18,6 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table"
-
 import  ApplicationForm  from "@/components/ApplicationForm"
 
 const DummyJobsList = [
@@ -122,7 +121,6 @@ const AppliedPage = () => {
                   </svg>
                 </a>
               </TableCell>
-              {/* for the link we can add an icon instead of the domain name of the url */}
               <TableCell>{job.location}</TableCell>
             </TableRow>
           ))}
