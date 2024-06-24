@@ -6,7 +6,7 @@ import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
 
-const applicationSchema = z.object({
+const savedSchema = z.object({
   title: z.string()
     .min(2,{
       message: "Position name must be at least 2 characters.",
@@ -28,11 +28,14 @@ const applicationSchema = z.object({
       message: "Location must be at least 2 characters.",
     }).max(50, {
       message: "Location must not be longer than 50 characters.",
-    }),
-  status: z.string()
+    })
 })
 
-const ApplicationForm = () => {
+const applicationSchema = z.intersection(savedSchema, z.object({
+  status: z.string()
+}))
+
+const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
   const form = useForm<z.infer<typeof applicationSchema>>({
     resolver: zodResolver(applicationSchema),
     defaultValues:{
@@ -95,29 +98,35 @@ const ApplicationForm = () => {
                 </FormControl>
               </FormItem>
           )}/>
-          <FormField
-            control={form.control}
-            name="status"
-            render={({field})=>(
-              <FormItem>
-                <FormLabel>Status</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Set status of application"/>
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Applied">Applied</SelectItem>
-                    <SelectItem value="Interview">Interview</SelectItem>
-                    <SelectItem value="NoResponse">No Response</SelectItem>
-                    <SelectItem value="Offer">Offer</SelectItem>
-                    <SelectItem value="Rejected">Rejected</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
-          />
+          {!isSavedPage ? (
+              <FormField
+              control={form.control}
+              name="status"
+              render={({field})=>(
+                <FormItem>
+                  <FormLabel>Status</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Set status of application"/>
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Applied">Applied</SelectItem>
+                      <SelectItem value="Interview">Interview</SelectItem>
+                      <SelectItem value="NoResponse">No Response</SelectItem>
+                      <SelectItem value="Offer">Offer</SelectItem>
+                      <SelectItem value="Rejected">Rejected</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+              />
+            ) : (
+              <></>
+            )
+          }
+
           <Button type="submit" className="mt-5">Add Application</Button>
         </form>
       </Form>

@@ -141,7 +141,7 @@ const AppliedPage = () => {
               Input information about the job such as the title, company name, and location of where the position is held. Once added, you can edit the information at a later time.
             </DialogDescription>
           </DialogHeader>
-          <ApplicationForm/>
+          <ApplicationForm isSavedPage={false}/>
         </DialogContent>
       </Dialog>
     </div>
