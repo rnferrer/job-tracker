@@ -44,11 +44,10 @@ const savedSchema = generalSchema.extend({
   date: z.date()
 })
 
-const combinedSchema = z.union([applicationSchema, savedSchema])
+type ApplicationFormValues = z.infer<typeof applicationSchema>;
+type SavedFormValues = z.infer<typeof savedSchema>;
 
-type FormValues = z.infer<typeof combinedSchema>
-
-const applicationDefaultValues: FormValues = {
+const applicationDefaultValues: ApplicationFormValues = {
   title:"",
   company:"",
   link:"",
@@ -56,7 +55,7 @@ const applicationDefaultValues: FormValues = {
   status: "Applied"
 }
 
-const savedDefaultValues: FormValues = {
+const savedDefaultValues: SavedFormValues = {
   title:"",
   company:"",
   link:"",
@@ -65,14 +64,15 @@ const savedDefaultValues: FormValues = {
 }
 
 const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
-  const defaultValues = isSavedPage ? applicationDefaultValues : savedDefaultValues
+  const schema = isSavedPage ? savedSchema : applicationSchema;
+  const defaultValues = isSavedPage ? savedDefaultValues : applicationDefaultValues
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(combinedSchema),
+  const form = useForm<ApplicationFormValues | SavedFormValues>({
+    resolver: zodResolver(schema),
     defaultValues
   })
 
-  function onSubmit(values: z.infer<typeof combinedSchema>){
+  function onSubmit(values: ApplicationFormValues | SavedFormValues){
     console.log(values)
   }
   return(
@@ -173,7 +173,7 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
                             </Button>
                           </FormControl>
                         </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
+                        <PopoverContent className="w-auto p-0 z-[100] pointer-events-auto" align="start">
                           <Calendar
                             mode="single"
                             selected={field.value}
