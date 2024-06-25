@@ -1,12 +1,17 @@
+import { CalendarIcon } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { format } from "date-fns"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form"
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-const savedSchema = z.object({
+const generalSchema = z.object({
   title: z.string()
     .min(2,{
       message: "Position name must be at least 2 characters.",
@@ -31,27 +36,47 @@ const savedSchema = z.object({
     })
 })
 
-const applicationSchema = z.intersection(savedSchema, z.object({
+const applicationSchema = generalSchema.extend({
   status: z.string()
-}))
+})
+
+const savedSchema = generalSchema.extend({
+  date: z.date()
+})
+
+const combinedSchema = z.union([applicationSchema, savedSchema])
+
+type FormValues = z.infer<typeof combinedSchema>
+
+const applicationDefaultValues: FormValues = {
+  title:"",
+  company:"",
+  link:"",
+  location:"",
+  status: "Applied"
+}
+
+const savedDefaultValues: FormValues = {
+  title:"",
+  company:"",
+  link:"",
+  location:"",
+  date: new Date()
+}
 
 const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
-  const form = useForm<z.infer<typeof applicationSchema>>({
-    resolver: zodResolver(applicationSchema),
-    defaultValues:{
-      title:"",
-      company:"",
-      link:"",
-      location:"",
-      status: "Applied"
-    }
+  const defaultValues = isSavedPage ? applicationDefaultValues : savedDefaultValues
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(combinedSchema),
+    defaultValues
   })
-  function onSubmit(values: z.infer<typeof applicationSchema>){
+
+  function onSubmit(values: z.infer<typeof combinedSchema>){
     console.log(values)
   }
   return(
     <div>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
@@ -81,7 +106,7 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
             name="link"
             render={({field})=>(
               <FormItem>
-                <FormLabel>Job Post URL</FormLabel>
+                <FormLabel>Job Posting URL</FormLabel>
                 <FormControl>
                   <Input {...field}/>
                 </FormControl>
@@ -123,10 +148,48 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
               )}
               />
             ) : (
-              <></>
+              <FormField
+                control={form.control}
+                name="date"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Job Posting Date</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"outline"}
+                              className={cn(
+                                "w-[240px] pl-3 text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                                {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={(date => field.onChange(date||new Date()))}
+                            disabled={(date) =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                  </FormItem>
+                )}
+              />
             )
           }
-
           <Button type="submit" className="mt-5">Add Application</Button>
         </form>
       </Form>
