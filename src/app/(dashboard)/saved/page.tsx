@@ -17,6 +17,8 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import SavedJobPopover from "@/components/SavedJobPopover"
 
 
 const DummyJobsList = [
@@ -108,9 +110,7 @@ const SavedJobsPage = () => {
               <TableCell>{job.company}</TableCell>
               <TableCell>{job.location}</TableCell>
               <TableCell className="ml-5">
-                <a href="https://www.linkedin.com/feed/" target="_blank">
-                  <Button>Apply</Button>
-                </a>
+                <SavedJobPopover/>
               </TableCell>
             </TableRow>
           ))}
