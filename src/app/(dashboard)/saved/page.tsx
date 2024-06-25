@@ -109,7 +109,7 @@ const SavedJobsPage = () => {
               <TableCell>{job.role}</TableCell>
               <TableCell>{job.company}</TableCell>
               <TableCell>{job.location}</TableCell>
-              <TableCell className="ml-5">
+              <TableCell>
                 <SavedJobPopover/>
               </TableCell>
             </TableRow>
