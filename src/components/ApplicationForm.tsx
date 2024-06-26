@@ -6,62 +6,89 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
+import {
+  applicationSchema,
+  applicationDefaultValues,
+  savedSchema,
+  savedDefaultValues,
+} from "@/lib/applicationFormSchema"
+import type {
+  ApplicationFormValues,
+  SavedFormValues
+} from "@/lib/applicationFormSchema"
+import { 
+  Form, 
+  FormControl, 
+  FormField, 
+  FormItem, 
+  FormLabel 
+} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { 
+  Popover, 
+  PopoverContent, 
+  PopoverTrigger 
+} from "@/components/ui/popover"
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select"
 
-const generalSchema = z.object({
-  title: z.string()
-    .min(2,{
-      message: "Position name must be at least 2 characters.",
-    }).max(50, {
-      message: "Position name must not be longer than 50 characters.",
-    }),
-  company: z.string()  
-    .min(2,{
-      message: "Company name must be at least 2 characters.",
-    }).max(50, {
-      message: "Company name must not be longer than 50 characters.",
-    }),
-  link: z.string()
-    .url({ 
-      message: "Invalid url" 
-    }),
-  location: z.string()  
-    .min(2,{
-      message: "Location must be at least 2 characters.",
-    }).max(50, {
-      message: "Location must not be longer than 50 characters.",
-    })
-})
 
-const applicationSchema = generalSchema.extend({
-  status: z.string()
-})
+// const generalSchema = z.object({
+//   title: z.string()
+//     .min(2,{
+//       message: "Position name must be at least 2 characters.",
+//     }).max(50, {
+//       message: "Position name must not be longer than 50 characters.",
+//     }),
+//   company: z.string()  
+//     .min(2,{
+//       message: "Company name must be at least 2 characters.",
+//     }).max(50, {
+//       message: "Company name must not be longer than 50 characters.",
+//     }),
+//   link: z.string()
+//     .url({ 
+//       message: "Invalid url" 
+//     }),
+//   location: z.string()  
+//     .min(2,{
+//       message: "Location must be at least 2 characters.",
+//     }).max(50, {
+//       message: "Location must not be longer than 50 characters.",
+//     })
+// })
 
-const savedSchema = generalSchema.extend({
-  date: z.date()
-})
+// const applicationSchema = generalSchema.extend({
+//   status: z.string()
+// })
 
-type ApplicationFormValues = z.infer<typeof applicationSchema>;
-type SavedFormValues = z.infer<typeof savedSchema>;
+// const savedSchema = generalSchema.extend({
+//   date: z.date()
+// })
 
-const applicationDefaultValues: ApplicationFormValues = {
-  title:"",
-  company:"",
-  link:"",
-  location:"",
-  status: "Applied"
-}
+// type ApplicationFormValues = z.infer<typeof applicationSchema>;
+// type SavedFormValues = z.infer<typeof savedSchema>;
 
-const savedDefaultValues: SavedFormValues = {
-  title:"",
-  company:"",
-  link:"",
-  location:"",
-  date: new Date()
-}
+// const applicationDefaultValues: ApplicationFormValues = {
+//   title:"",
+//   company:"",
+//   link:"",
+//   location:"",
+//   status: "Applied"
+// }
+
+// const savedDefaultValues: SavedFormValues = {
+//   title:"",
+//   company:"",
+//   link:"",
+//   location:"",
+//   date: new Date()
+// }
 
 const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
   const schema = isSavedPage ? savedSchema : applicationSchema;
