@@ -1,35 +1,20 @@
 "use client"
 import { 
-  NavigationMenu, 
-  NavigationMenuItem, 
-  NavigationMenuLink, 
-  NavigationMenuList, 
-  navigationMenuTriggerStyle 
-} from "@/components/ui/navigation-menu";
-import { 
   Tabs, 
   TabsContent, 
   TabsList, 
   TabsTrigger  
 } from "@/components/ui/tabs";
 import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
   UserButton
 } from "@clerk/nextjs"
 import Link from "next/link";
-import { useState } from "react";
 
-type DashboardRoutes = 'Applied' | 'Saved' | 'Interviews'
-
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const [page, setPage] = useState<DashboardRoutes>('Applied')
-
-  const handleClick = (page:DashboardRoutes) => {
-    setPage(page)
-    console.log(page)
-  }
+export default function DashboardLayout({ 
+  children 
+}: { 
+  children: React.ReactNode 
+}) {
 
   return (
     <div className="flex flex-col w-screen p-20 relative">

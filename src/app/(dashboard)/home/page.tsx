@@ -1,8 +1,8 @@
 "use client"
 
-import HomeAppliedContent from "@/components/HomeAppliedContent"
-import HomeInterviewContent from "@/components/HomeInterviewContent"
-import HomeSavedContent from "@/components/HomeSavedContent"
+import HomeAppliedContent from "@/components/home/HomeAppliedContent"
+import HomeInterviewContent from "@/components/home/HomeInterviewContent"
+import HomeSavedContent from "@/components/home/HomeSavedContent"
 import {
   Card,
   CardContent,

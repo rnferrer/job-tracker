@@ -1,14 +1,10 @@
-import { Badge } from "@/components/ui/badge"
 import { 
   Table, 
   TableBody, 
   TableCell, 
-  TableHead, 
-  TableHeader, 
   TableRow 
 } from "@/components/ui/table"
-import { ScrollArea } from "./ui/scroll-area"
-
+import { ScrollArea } from "../ui/scroll-area"
 const DummyJobsList = [
   {
     last_edited: "May 23, 2024 5:00PM",
@@ -75,8 +71,7 @@ const DummyJobsList = [
     location: "San Francisco, US"
   }
 ]
-
-const HomeAppliedContent= () => {
+const HomeSavedContent= () => {
   return(
     <div>
       <ScrollArea className="h-[200px] w-auto">
@@ -85,9 +80,6 @@ const HomeAppliedContent= () => {
             {DummyJobsList.map((job, i)=>(
               <TableRow key={i}>
                 <TableCell>{job.role} @ {job.company}</TableCell>
-                <TableCell>
-                  <Badge>{job.status}</Badge>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -97,4 +89,4 @@ const HomeAppliedContent= () => {
   )
 }
 
-export default HomeAppliedContent
+export default HomeSavedContent
