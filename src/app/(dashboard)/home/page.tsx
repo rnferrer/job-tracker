@@ -1,4 +1,3 @@
-"use client"
 
 import HomeAppliedContent from "@/components/home/HomeAppliedContent"
 import HomeInterviewContent from "@/components/home/HomeInterviewContent"

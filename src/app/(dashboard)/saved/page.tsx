@@ -8,7 +8,7 @@ import {
   DialogTrigger 
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import  ApplicationForm  from "@/components/ApplicationForm"
+import  ApplicationForm  from "@/components/applied/ApplicationForm"
 import { 
   Table, 
   TableBody, 
