@@ -20,7 +20,7 @@ const HomePage = () => {
           <HomeAppliedContent/>
         </CardContent>
       </Card>
-      <Card className="">
+      <Card className="h-[300px]">
         <CardHeader>
           <CardTitle>Saved Jobs</CardTitle>
         </CardHeader>

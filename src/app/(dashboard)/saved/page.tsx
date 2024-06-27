@@ -1,4 +1,5 @@
 "use client"
+import { Button } from "@/components/ui/button"
 import { 
   Dialog, 
   DialogContent,
@@ -7,8 +8,6 @@ import {
   DialogTitle,
   DialogTrigger 
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import  ApplicationForm  from "@/components/applied/ApplicationForm"
 import { 
   Table, 
   TableBody, 
@@ -17,6 +16,7 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table"
+import  ApplicationForm  from "@/components/applied/ApplicationForm"
 import SavedJobPopover from "@/components/SavedJobPopover"
 
 

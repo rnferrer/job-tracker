@@ -24,7 +24,7 @@ export default function DashboardLayout({
           <UserButton />
         </div>
       <nav className="mt-[2.5rem]">
-        <Tabs className="w-[1000px]">
+        <Tabs className="w-[1000px]" defaultValue="home">
           <TabsList className="grid w-[50%] grid-cols-4">
             <Link href="home" >
               <TabsTrigger value="home" className="w-full">

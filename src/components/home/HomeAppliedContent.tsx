@@ -74,6 +74,8 @@ const DummyJobsList = [
   }
 ]
 
+//TODO: Create server action to fetch applied jobs
+
 const HomeAppliedContent= () => {
   return(
     <div>

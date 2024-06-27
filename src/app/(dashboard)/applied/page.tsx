@@ -1,5 +1,4 @@
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { 
   Dialog, 
@@ -9,14 +8,6 @@ import {
   DialogTitle,
   DialogTrigger 
 } from "@/components/ui/dialog"
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table"
 import ApplicationForm  from "@/components/applied/ApplicationForm"
 import AppliedTable from "@/components/applied/AppliedTable"
 
@@ -92,7 +83,6 @@ const AppliedPage = () => {
   
   return(
     <div className="relative">
-      
       <AppliedTable DummyJobsList={DummyJobsList}/>
       <Dialog>
         <DialogTrigger asChild>

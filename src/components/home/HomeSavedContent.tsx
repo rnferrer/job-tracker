@@ -5,6 +5,7 @@ import {
   TableRow 
 } from "@/components/ui/table"
 import { ScrollArea } from "../ui/scroll-area"
+
 const DummyJobsList = [
   {
     last_edited: "May 23, 2024 5:00PM",
@@ -71,6 +72,7 @@ const DummyJobsList = [
     location: "San Francisco, US"
   }
 ]
+//TODO: Create server action to fetch saved jobs
 const HomeSavedContent= () => {
   return(
     <div>

@@ -20,7 +20,11 @@ type AppliedJob = {
   location: string
 }
 
-const AppliedTable= ({DummyJobsList}: {DummyJobList: any }) => {
+const AppliedTable= ({
+  DummyJobsList
+}: {
+  DummyJobsList: AppliedJob[]
+}) => {
   return(
     <div>
      <Table>
@@ -35,7 +39,7 @@ const AppliedTable= ({DummyJobsList}: {DummyJobList: any }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {DummyJobsList.map((job, i)=>(
+          {DummyJobsList.map((job:AppliedJob, i:number)=>(
             <TableRow key={i}>
               <TableCell>{job.last_edited}</TableCell>
               <TableCell>
