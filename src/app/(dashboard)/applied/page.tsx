@@ -1,4 +1,4 @@
-
+"use client"
 import { Button } from "@/components/ui/button"
 import { 
   Dialog, 
@@ -10,6 +10,10 @@ import {
 } from "@/components/ui/dialog"
 import ApplicationForm  from "@/components/applied/ApplicationForm"
 import AppliedTable from "@/components/applied/AppliedTable"
+import { useRef, useState } from "react"
+import createClerkSupabaseClient from "@/lib/supabase/client"
+
+
 
 const DummyJobsList = [
   {
@@ -80,6 +84,22 @@ const DummyJobsList = [
 
 
 const AppliedPage = () => {
+  const client = createClerkSupabaseClient()
+  const [addresses, setAddresses] = useState<any>();
+
+  const listAddresses = async () => {
+
+    const { data, error } = await client.from("applications").select();
+    if (!error) {
+      setAddresses(data);
+      console.log(data)
+    }
+    else{
+      console.log(error)
+    }
+  };
+  listAddresses()
+
   
   return(
     <div className="relative">
@@ -100,6 +120,10 @@ const AppliedPage = () => {
           <ApplicationForm isSavedPage={false}/>
         </DialogContent>
       </Dialog>
+      <div>
+        hello
+        {addresses}
+      </div>
     </div>
   )
 }
