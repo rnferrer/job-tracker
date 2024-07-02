@@ -56,7 +56,7 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
-            name="title"
+            name="job_title"
             render={({field})=>(
               <FormItem>
                 <FormLabel>Position Name</FormLabel>
@@ -67,7 +67,7 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
             )}/>
           <FormField
             control={form.control}
-            name="company"
+            name="company_name"
             render={({field})=>(
               <FormItem>
                 <FormLabel>Company Name</FormLabel>
@@ -78,7 +78,7 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
           )}/>
           <FormField
             control={form.control}
-            name="link"
+            name="url"
             render={({field})=>(
               <FormItem>
                 <FormLabel>Job Posting URL</FormLabel>

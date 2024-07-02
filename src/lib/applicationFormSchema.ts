@@ -1,19 +1,19 @@
 import { z } from "zod"
 
 const generalSchema = z.object({
-  title: z.string()
+  job_title: z.string()
     .min(2,{
       message: "Position name must be at least 2 characters.",
     }).max(50, {
       message: "Position name must not be longer than 50 characters.",
     }),
-  company: z.string()  
+  company_name: z.string()  
     .min(2,{
       message: "Company name must be at least 2 characters.",
     }).max(50, {
       message: "Company name must not be longer than 50 characters.",
     }),
-  link: z.string()
+  url: z.string()
     .url({ 
       message: "Invalid url" 
     }),
@@ -37,17 +37,17 @@ type ApplicationFormValues = z.infer<typeof applicationSchema>;
 type SavedFormValues = z.infer<typeof savedSchema>;
 
 const applicationDefaultValues: ApplicationFormValues = {
-  title:"",
-  company:"",
-  link:"",
+  job_title:"",
+  company_name:"",
+  url:"",
   location:"",
   status: "Applied"
 }
 
 const savedDefaultValues: SavedFormValues = {
-  title:"",
-  company:"",
-  link:"",
+  job_title:"",
+  company_name:"",
+  url:"",
   location:"",
   date: new Date()
 }
