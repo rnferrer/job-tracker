@@ -25,7 +25,7 @@ function createClerkSupabaseClient() {
           const headers = new Headers(options?.headers);
           headers.set("Authorization", `Bearer ${clerkToken}`);
 
-          // Now call the default fetch
+          //Call the default fetch
           return fetch(url, {
             ...options,
             headers,

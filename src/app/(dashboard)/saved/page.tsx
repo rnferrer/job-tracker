@@ -87,7 +87,17 @@ const DummyJobsList = [
   }
 ]
 
-
+/*TODO: 
+  - have the Saved page add an applied job after saying you applied after the toast
+    - could either 
+      - upload to the DB directly to update the user's applied jobs
+      - have the saved page and applied page share a state of the user's application data and when you click yes after applying to a job it changes the applied page through state
+    - both would require, from the user POV
+      - after clicking yes on the toast, the toast needs to disappear 
+      - also the job you just applied to, the job itself has to disappear and a toast confirms the addition to the applied data/page
+      - then when you click on the applied tab again, the newly applied job will be added to the top(or bottom) of the job list
+      
+*/
 const SavedJobsPage = () => {
   return(
     <div>

@@ -13,7 +13,11 @@ const SavedJobPopover= () => {
       <Popover open={popoverOpen}>
         <PopoverTrigger asChild>
           <a href="https://www.linkedin.com/feed/" target="_blank">
-            <Button onClick={()=>setPopoverOpen(true)}>Apply</Button>
+            <Button 
+              onClick={()=>setPopoverOpen(true)}
+              className="py-2 px-4 text-xs"
+            >Apply
+            </Button>
           </a>
         </PopoverTrigger>
         <PopoverContent>
