@@ -82,6 +82,12 @@ const DummyJobsList = [
   }
 ]
 
+/*
+TODO:
+- after adding a new application, add it to the job list and db
+
+*/
+
 
 const AppliedPage = () => {
   const client = createClerkSupabaseClient()
