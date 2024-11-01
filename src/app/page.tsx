@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-
+/*
+TODO: add routes for db entry
+*/
 export default function Landing() {
   return (
     <div className="w-screen h-screen flex justify-center items-center text-black">
