@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/table"
 import  ApplicationForm  from "@/components/applied/ApplicationForm"
 import SavedJobPopover from "@/components/SavedJobPopover"
-
+import type { NextPage } from 'next'
 
 const DummyJobsList = [
   {
@@ -98,7 +98,7 @@ const DummyJobsList = [
       - then when you click on the applied tab again, the newly applied job will be added to the top(or bottom) of the job list
       
 */
-const SavedJobsPage = () => {
+const SavedJobsPage: NextPage = () => {
   return(
     <div>
       <Table>

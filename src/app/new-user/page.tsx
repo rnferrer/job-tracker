@@ -1,5 +1,7 @@
 "use-client"
-const NewUser = () => {
+import type { NextPage } from 'next'
+
+const NewUser: NextPage = () => {
   return(
     <div>
       hello

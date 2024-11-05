@@ -1,10 +1,13 @@
 "use client"
 
-import FullCalendar from "@fullcalendar/react"
+import { DateSelectArg } from "@fullcalendar/core"
 import dayGridPlugin from "@fullcalendar/daygrid"
+import FullCalendar from "@fullcalendar/react"
 import timeGridPlugin from "@fullcalendar/timegrid"
+import type { NextPage } from 'next'
 
-const InterviewPage = () => {
+
+const InterviewPage: NextPage = () => {
   return(
     <div className="flex justify-center">
       <div className="w-[80%]">

@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import ApplicationForm  from "@/components/applied/ApplicationForm"
 import AppliedTable from "@/components/applied/AppliedTable"
+import type { NextPage } from 'next'
 
 const DummyJobsList = [
   {
@@ -85,7 +86,7 @@ TODO:
 
 */
 
-const AppliedPage = () => {
+const AppliedPage: NextPage = () => {
   
   return(
     <div className="relative">

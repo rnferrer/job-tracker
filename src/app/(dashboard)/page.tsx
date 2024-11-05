@@ -1,5 +1,6 @@
+import type { NextPage } from 'next'
 
-const Dashboard = () => {
+const Dashboard: NextPage = () => {
   return(
     <div>
       Dashboard
