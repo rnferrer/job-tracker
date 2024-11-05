@@ -113,7 +113,7 @@ const SavedJobsPage = () => {
         </TableHeader>
         <TableBody>
           {DummyJobsList.map((job, i)=>(
-            <TableRow key={i}>
+            <TableRow className="cursor-default" key={i}>
               <TableCell>{job.last_edited}</TableCell>
               <TableCell>{job.role}</TableCell>
               <TableCell>{job.company}</TableCell>

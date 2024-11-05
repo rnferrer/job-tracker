@@ -40,10 +40,10 @@ const AppliedTable= ({
         </TableHeader>
         <TableBody>
           {DummyJobsList.map((job:AppliedJob, i:number)=>(
-            <TableRow key={i}>
+            <TableRow className="cursor-default" key={i}>
               <TableCell>{job.last_edited}</TableCell>
               <TableCell>
-                <Badge>{job.status}</Badge>
+                <Badge >{job.status}</Badge>
               </TableCell>
               <TableCell>{job.role}</TableCell>
               <TableCell>{job.company}</TableCell>

@@ -127,7 +127,6 @@ const AppliedPage = () => {
         </DialogContent>
       </Dialog>
       <div>
-        hello
         {addresses}
       </div>
     </div>
