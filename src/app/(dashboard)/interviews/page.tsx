@@ -1,4 +1,5 @@
 "use client"
+
 import FullCalendar from "@fullcalendar/react"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import timeGridPlugin from "@fullcalendar/timegrid"
@@ -11,10 +12,11 @@ const InterviewPage = () => {
           plugins= {[dayGridPlugin]}
           initialView= 'dayGridMonth'
           aspectRatio={2.4}
+          fixedWeekCount={false}
           headerToolbar= {{
             left: 'prev,next',
             center: 'title',
-            right: 'timeGridWeek,timeGridDay'
+            right: 'timeGridWeek, dayGridMonth'
           }}
         />
 

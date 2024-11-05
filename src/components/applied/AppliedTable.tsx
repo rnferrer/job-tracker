@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 
-
 type AppliedJob = {
   last_edited: string,
   status: string, //can convert this to an int for easier storage
