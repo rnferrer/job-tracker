@@ -9,6 +9,9 @@ import {
   TableRow 
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "../ui/button"
+import { MoreHorizontal } from "lucide-react"
+import EditApplicationMenu from "./EditApplicationMenu"
 
 type AppliedJob = {
   last_edited: string,
@@ -17,7 +20,7 @@ type AppliedJob = {
   company:string,
   job_link: string,
   location: string
-}
+};
 
 const AppliedTable= ({
   DummyJobsList
@@ -35,6 +38,7 @@ const AppliedTable= ({
             <TableHead>Company</TableHead>
             <TableHead>Job Posting</TableHead>
             <TableHead>Location</TableHead>
+            <TableHead></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -55,6 +59,9 @@ const AppliedTable= ({
                 </a>
               </TableCell>
               <TableCell>{job.location}</TableCell>
+              <TableCell>
+                <EditApplicationMenu/>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
