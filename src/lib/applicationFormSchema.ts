@@ -25,6 +25,24 @@ const generalSchema = z.object({
     })
 })
 
+const interviewSchema = z.object({
+  job_id: z.string()
+    .min(2,{
+      message: "Job ID is invalid."
+    })
+    .max(50, {
+      message: "Job ID is invalid."
+    }),
+  title: z.string()
+    .min(2,{
+      message: "Interview title must be at least 2 characters.",
+    }).max(50, {
+      message: "Company title must not be longer than 50 characters.",
+    }),
+  start: z.date(),
+  end: z.date()
+})
+
 const applicationSchema = generalSchema.extend({
   status: z.string()
 })
