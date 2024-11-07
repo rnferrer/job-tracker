@@ -38,6 +38,13 @@ import {
   SelectValue 
 } from "@/components/ui/select"
 
+/*
+TODO:
+  - Refactor code so it is not redundant
+    - Remove 'Job Posted' field
+    - Make the 'Status' field on Applied page conditional based on the current path
+*/
+
 const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
   const schema = isSavedPage ? savedSchema : applicationSchema;
   const defaultValues = isSavedPage ? savedDefaultValues : applicationDefaultValues

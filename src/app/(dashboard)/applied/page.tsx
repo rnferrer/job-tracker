@@ -83,7 +83,7 @@ const DummyJobsList = [
 /*
 TODO:
 - after adding a new application, add it to the job list and db
-
+- Allow for the status of the application to be editable through hovering and selecting
 */
 
 const AppliedPage: NextPage = () => {
