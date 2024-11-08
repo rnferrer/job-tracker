@@ -8,10 +8,30 @@ import {
   DropdownMenuTrigger
 } from "../ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
+import InterviewForm from "../interviews/InterviewForm"
 
+
+//experimental
+import { 
+  Dialog, 
+  DialogContent,
+  DialogDescription, 
+  DialogHeader, 
+  DialogTitle,
+  DialogTrigger 
+} from "@/components/ui/dialog"
+
+
+
+/*
+  TODO:
+    - Convert current hierarchy of components to have the dialog wrap the dropdownmenu
+      - Can use this as resource: https://github.com/radix-ui/primitives/issues/1836
+*/
 const EditApplicationMenu = () => {
   return(
     <>
+
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Button variant="ghost" className="h-8 w-8 p-0">
@@ -21,7 +41,7 @@ const EditApplicationMenu = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem className="cursor-pointer">
-          Add Interview
+          <InterviewForm/>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer">
           Edit

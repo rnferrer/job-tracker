@@ -22,7 +22,7 @@ type AppliedJob = {
   location: string
 };
 
-const AppliedTable= ({
+const AppliedTable = ({
   DummyJobsList
 }: {
   DummyJobsList: AppliedJob[]
