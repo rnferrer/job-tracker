@@ -8,27 +8,37 @@ import {
   DialogTrigger 
 } from "@/components/ui/dialog"
 import { 
-  Form, 
-  FormControl, 
-  FormField, 
-  FormItem, 
-  FormLabel 
-} from "@/components/ui/form"
+  DropdownMenuItem
+} from "@/components/ui/dropdown-menu" 
+import { forwardRef } from "react"
 
 // {children}:{children:React.ReactNode}
-const InterviewForm = () => {
+const InterviewForm = forwardRef((props: any, forwardRef) => {
+  const { triggerChildren, children, onSelect, onOpenChange, ...itemProps} = props
   return(
     <>
       <Dialog>
-        <DialogTrigger asChild={true}>
-          Add interview
+        <DialogTrigger asChild>
+          <DropdownMenuItem
+            {...itemProps}
+            ref={forwardRef}
+            onSelect={(event) => {
+              event.preventDefault();
+              onSelect && onSelect()
+            }}
+          >
+            {triggerChildren}
+          </DropdownMenuItem>
         </DialogTrigger>
         <DialogContent>
-          Hello
+          {children}
+          <DialogHeader>
+            Hello there
+          </DialogHeader>
         </DialogContent>
       </Dialog>
     </>
   )
-}
+})
 
 export default InterviewForm
