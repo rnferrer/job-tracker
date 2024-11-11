@@ -35,7 +35,7 @@ const EditApplicationMenu = () => {
   return(
     <>
 
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-8 w-8 p-0">
           <span className="sr-only">Open menu</span>
@@ -43,10 +43,9 @@ const EditApplicationMenu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem className="cursor-pointer" onSelect={(e:any) => e.preventDefault()}>
           <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger>
-              <DropdownMenuItem>
+            <DialogTrigger asChild>
+              <DropdownMenuItem onSelect={(e)=>e.preventDefault()}>
                 Add Interview
               </DropdownMenuItem>
             </DialogTrigger>
@@ -54,13 +53,12 @@ const EditApplicationMenu = () => {
               Add interview here!
             </DialogContent>
           </Dialog>
-        </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">
+        {/* <DropdownMenuItem className="cursor-pointer">
           Edit
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer">
           Delete
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
     </>
