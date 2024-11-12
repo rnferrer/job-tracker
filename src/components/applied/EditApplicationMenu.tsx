@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger
 } from "../ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
-import InterviewForm from "../interviews/InterviewForm"
+import ApplicationForm from "./ApplicationForm"
 
 
 //experimental
@@ -45,12 +45,18 @@ const EditApplicationMenu = () => {
       <DropdownMenuContent>
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-              <DropdownMenuItem onSelect={(e)=>e.preventDefault()}>
+              <DropdownMenuItem className="cursor-pointer"onSelect={(e)=>e.preventDefault()}>
                 Add Interview
               </DropdownMenuItem>
             </DialogTrigger>
             <DialogContent>
-              Add interview here!
+              <DialogTitle>
+                Add an interview for this job
+              </DialogTitle>
+              <DialogDescription>
+                Input information on the interview such as the start and end time, interview title, and any additional notes you may need. There is an overview of all your scheduled interviews in the "Interviews" tab.
+              </DialogDescription>
+              <ApplicationForm isSavedPage={false}/>
             </DialogContent>
           </Dialog>
         {/* <DropdownMenuItem className="cursor-pointer">
