@@ -75,7 +75,7 @@ const InterviewForm = () => {
             render= {({field}) => (
               <FormItem className="flex flex-col w-full mt-0.5">
                 <FormLabel className="">Date & Time</FormLabel>
-                <Popover modal={true}>
+                <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
                       <Button
