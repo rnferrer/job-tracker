@@ -1,44 +1,50 @@
 "use client"
+import {
+  Calendar
+} from "@/components/ui/calendar"
 import { 
-  Dialog, 
-  DialogContent,
-  DialogDescription, 
-  DialogHeader, 
-  DialogTitle,
-  DialogTrigger 
-} from "@/components/ui/dialog"
-import { 
-  DropdownMenuItem
-} from "@/components/ui/dropdown-menu" 
-import { forwardRef } from "react"
+  Form, 
+  FormControl, 
+  FormField, 
+  FormItem, 
+  FormLabel 
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import type { InterviewFormValues } from "@/lib/FormSchema"
+import { interviewSchema } from "@/lib/FormSchema"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 
-// {children}:{children:React.ReactNode}
-const InterviewForm = forwardRef((props: any, forwardRef) => {
-  const { triggerChildren, children, onSelect, onOpenChange, ...itemProps} = props
+
+const InterviewForm = () => {
+  const form = useForm<InterviewFormValues>({
+    resolver: zodResolver(interviewSchema)
+  })
+
+  function onSubmit(values: InterviewFormValues){
+    console.log(values)
+  }
   return(
-    <>
-      <Dialog>
-        <DialogTrigger asChild>
-          <DropdownMenuItem
-            {...itemProps}
-            ref={forwardRef}
-            onSelect={(event) => {
-              event.preventDefault();
-              onSelect && onSelect()
-            }}
-          >
-            {triggerChildren}
-          </DropdownMenuItem>
-        </DialogTrigger>
-        <DialogContent>
-          {children}
-          <DialogHeader>
-            Hello there
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+    <> 
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="job_id"
+            render={(field) => (
+              <FormItem>
+                <FormLabel>Job Application</FormLabel>
+                <FormControl>
+                  <Input placeholder="Choose Job Application" {...field}/>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        </form>
+
+      </Form>
     </>
   )
-})
+}
 
 export default InterviewForm

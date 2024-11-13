@@ -9,7 +9,7 @@ import {
 } from "../ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
 import ApplicationForm from "./ApplicationForm"
-
+import InterviewForm from "../interviews/InterviewForm"
 
 //experimental
 import { 
@@ -56,7 +56,7 @@ const EditApplicationMenu = () => {
               <DialogDescription>
                 Input information on the interview such as the start and end time, interview title, and any additional notes you may need. There is an overview of all your scheduled interviews in the "Interviews" tab.
               </DialogDescription>
-              <ApplicationForm isSavedPage={false}/>
+              <InterviewForm/>
             </DialogContent>
           </Dialog>
         {/* <DropdownMenuItem className="cursor-pointer">

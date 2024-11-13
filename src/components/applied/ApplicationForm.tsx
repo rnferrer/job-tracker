@@ -96,7 +96,7 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
           <FormField
             control={form.control}
             name="location"
-            render={({field})=>(
+            render={({field}) => (
               <FormItem>
                 <FormLabel>Location</FormLabel>
                 <FormControl>
