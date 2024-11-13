@@ -17,7 +17,7 @@ import {
   TableRow 
 } from "@/components/ui/table"
 import  ApplicationForm  from "@/components/applied/ApplicationForm"
-import SavedJobPopover from "@/components/SavedJobPopover"
+import SavedJobPopover from "@/components/saved/SavedJobPopover"
 import type { NextPage } from 'next'
 
 const DummyJobsList = [
