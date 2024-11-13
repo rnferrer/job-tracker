@@ -94,48 +94,51 @@ const InterviewForm = () => {
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent side="bottom" avoidCollisions={false}>
-                    <Calendar
-                      className="pl-0"
-                      mode="single"
-                      selected={date}
-                      onSelect={setDate}
-                    />
-                    <div className="flex flex-row justify-evenly">
+                  <PopoverContent side="bottom" avoidCollisions={false} className="w-[450px]">
+                    <div className="flex flex-row">
+
+                      <Calendar
+                        className="pl-0"
+                        mode="single"
+                        selected={date}
+                        onSelect={setDate}
+                      />
                       <div className="flex flex-col">
-                        <label className="text-[14px]">
-                          Start Time
-                        </label>
-                        <div className="flex items-center">
-                          <TimePickerInput
-                            picker="hours"
-                            date={date}
-                            setDate={setDate}
-                          />
-                          <span>:</span>
-                          <TimePickerInput
-                            picker="minutes"
-                            date={date}
-                            setDate={setDate}
-                          />
+                        <div className="flex flex-col">
+                          <label className="text-[14px]">
+                            Start Time
+                          </label>
+                          <div className="flex items-center">
+                            <TimePickerInput
+                              picker="hours"
+                              date={date}
+                              setDate={setDate}
+                            />
+                            <span>:</span>
+                            <TimePickerInput
+                              picker="minutes"
+                              date={date}
+                              setDate={setDate}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <label className="text-[14px]">
-                          End Time
-                        </label>
-                        <div className="flex items-center">
-                          <TimePickerInput
-                            picker="hours"
-                            date={date}
-                            setDate={setDate}
-                          />
-                          <span>:</span>
-                          <TimePickerInput
-                            picker="minutes"
-                            date={date}
-                            setDate={setDate}
-                          />
+                        <div className="flex flex-col">
+                          <label className="text-[14px]">
+                            End Time
+                          </label>
+                          <div className="flex items-center">
+                            <TimePickerInput
+                              picker="hours"
+                              date={date}
+                              setDate={setDate}
+                            />
+                            <span>:</span>
+                            <TimePickerInput
+                              picker="minutes"
+                              date={date}
+                              setDate={setDate}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>

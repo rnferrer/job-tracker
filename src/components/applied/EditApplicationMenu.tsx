@@ -50,7 +50,7 @@ const EditApplicationMenu = () => {
                 Add Interview
               </DropdownMenuItem>
             </DialogTrigger>
-            <DialogContent className="mt-[-10rem]">
+            <DialogContent className="mt-[-9.5rem]">
               <DialogTitle>
                 Add an interview for this job
               </DialogTitle>
