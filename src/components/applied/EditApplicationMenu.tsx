@@ -42,8 +42,9 @@ const EditApplicationMenu = () => {
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-          <Dialog open={open} onOpenChange={setOpen}>
+      <DropdownMenuContent align="center">
+
+          <Dialog>
             <DialogTrigger asChild>
               <DropdownMenuItem className="cursor-pointer"onSelect={(e)=>e.preventDefault()}>
                 Add Interview
@@ -59,12 +60,29 @@ const EditApplicationMenu = () => {
               <InterviewForm/>
             </DialogContent>
           </Dialog>
-        {/* <DropdownMenuItem className="cursor-pointer">
-          Edit
-        </DropdownMenuItem>
-        <DropdownMenuItem className="cursor-pointer">
-          Delete
-        </DropdownMenuItem> */}
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <DropdownMenuItem className="cursor-pointer"onSelect={(e)=>e.preventDefault()}>
+                Edit
+              </DropdownMenuItem>
+            </DialogTrigger>
+            <DialogContent>
+              <ApplicationForm isSavedPage={false}/>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <DropdownMenuItem className="cursor-pointer"onSelect={(e)=>e.preventDefault()}>
+                Delete
+              </DropdownMenuItem>
+            </DialogTrigger>
+            <DialogContent>
+              Are you sure you want to delete this application?
+            </DialogContent>
+          </Dialog>
+
       </DropdownMenuContent>
     </DropdownMenu>
     </>
