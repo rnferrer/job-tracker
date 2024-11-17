@@ -40,12 +40,13 @@ const interviewSchema = z
       }).max(50, {
         message: "Company title must not be longer than 50 characters.",
       }),
-    start: z.string().date(),
-    // end: z.string().datetime()
+    date: z.string().date(),
+    start: z.string().time(),
+    end: z.string().time()
   })
-//   .refine((data) => data.start > data.end, {
-//     message: "End time must be after start time"
-// });
+  .refine((data) => data.end > data.start, {
+    message: "End time must be after start time"
+});
 
 const applicationSchema = generalSchema.extend({
   status: z.string()
