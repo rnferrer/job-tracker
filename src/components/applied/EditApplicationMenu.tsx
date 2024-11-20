@@ -43,7 +43,6 @@ const EditApplicationMenu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center">
-
           <Dialog>
             <DialogTrigger asChild>
               <DropdownMenuItem className="cursor-pointer"onSelect={(e)=>e.preventDefault()}>

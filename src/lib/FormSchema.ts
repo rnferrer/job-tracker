@@ -27,7 +27,9 @@ const generalSchema = z.object({
 
 const interviewSchema = z
   .object({
-    job_id: z.string()
+    job_id: z.string({
+      required_error: "Please enter a valid job ID"
+    })
       .min(2,{
         message: "Job ID is invalid."
       })
@@ -40,13 +42,13 @@ const interviewSchema = z
       }).max(50, {
         message: "Company title must not be longer than 50 characters.",
       }),
-    date: z.string().date(),
-    start: z.string().time(),
-    end: z.string().time()
+    date: z.date(),
+    // start: z.string().time(),
+    // end: z.string().time()
   })
-  .refine((data) => data.end > data.start, {
-    message: "End time must be after start time"
-});
+//   .refine((data) => data.end > data.start, {
+//     message: "End time must be after start time"
+// });
 
 const applicationSchema = generalSchema.extend({
   status: z.string()
@@ -59,6 +61,12 @@ const savedSchema = generalSchema.extend({
 type ApplicationFormValues = z.infer<typeof applicationSchema>;
 type SavedFormValues = z.infer<typeof savedSchema>;
 type InterviewFormValues = z.infer<typeof interviewSchema>;
+
+const interviewDefaultValues: InterviewFormValues = {
+  job_id:"",
+  title: "",
+  date: new Date()
+}
 
 const applicationDefaultValues: ApplicationFormValues = {
   job_title:"",
@@ -80,6 +88,7 @@ export {
   applicationSchema,
   applicationDefaultValues,
   interviewSchema,
+  interviewDefaultValues,
   savedSchema,
   savedDefaultValues,
 }

@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input"
 import { interviewSchema } from "@/lib/FormSchema"
 import { TimePickerInput } from "../timePicker/timePickerInput"
 import { useForm } from "react-hook-form"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import type { InterviewFormValues } from "@/lib/FormSchema"
@@ -34,6 +34,10 @@ const InterviewForm = () => {
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [startTime, setStartTime] = useState<Date>()
   const [endTime, setEndTime] = useState<Date>()
+
+  const startHourRef = useRef<HTMLInputElement>(null)
+  const startMinuteRef = useRef<HTMLInputElement>(null)
+
 
 
   const form = useForm<InterviewFormValues>({
@@ -59,7 +63,7 @@ const InterviewForm = () => {
           <FormField
             control={form.control}
             name="job_id"
-            render={(field) => (
+            render={({field}) => (
               <FormItem>
                 <FormLabel>Job Application</FormLabel>
                 <FormControl>
@@ -71,68 +75,70 @@ const InterviewForm = () => {
           <FormField
             control={form.control}
             name="title"
-            render={(field) => (
+            render={({field}) => (
               <FormItem className="mt-2">
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="Choose Job Application" {...field}/>
+                  <Input placeholder="Enter a title for the interview" {...field}/>
                 </FormControl>
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
-            name="start"
+            name="date"
             render= {({field}) => (
               <FormItem className="flex flex-col w-full mt-3">
                 <FormLabel className="">Date & Time</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <FormControl>
+          
                       <Button
                         variant={"outline"}
                         className={cn(
                           "w-full justify-start text-left font-normal",
-                          !date && "text-muted-foreground"
+                          !field.value && "text-muted-foreground"
                         )}
                       >
-                        {(endTime) ? (
-                          format(endTime, "PPP HH:mm")
+                        {field.value ? (
+                          format(field.value, "PPP HH:mm")
                           ) : (
                             <span>Pick a date</span>
                         )}
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50"/>
                       </Button>
-                    </FormControl>
                   </PopoverTrigger>
                   <PopoverContent side="bottom" avoidCollisions={false} className="w-[450px] min-h-full">
                     <div className="flex flex-row">
                       <Calendar
                         className="pl-0"
                         mode="single"
-                        selected={date}
-                        onSelect={setDate}
+                        selected={field.value}
+                        onDayClick={field.onChange}
+                        initialFocus
                       />
-                      <div className="flex flex-col h-[200px] justify-evenly">
-                        <div className="flex flex-col">
-                          <label className="text-[14px]">
-                            Start Time
-                          </label>
+                      <div className="flex flex-col gap-3 justify-center">
+                        <div>
+                          <label className="text-[14px]">Start Time</label>
                           <div className="flex items-center">
                             <TimePickerInput
                               picker="hours"
-                              date={date}
-                              setDate={setDate}
+                              ref={startHourRef}
+                              date={field.value}
+                              setDate={field.onChange}
+                              onRightFocus={() => startMinuteRef.current?.focus()}
                             />
                             <span>:</span>
                             <TimePickerInput
                               picker="minutes"
-                              date={date}
-                              setDate={setDate}
+                              ref={startMinuteRef}
+                              date={field.value}
+                              setDate={field.onChange}
+                              onLeftFocus={() => startHourRef.current?.focus()}
                             />
                           </div>
                         </div>
-                        <div className="flex flex-col">
+                        {/* <div>
                           <label className="text-[14px]">
                             End Time
                           </label>
@@ -149,7 +155,7 @@ const InterviewForm = () => {
                               setDate={setTime}
                             />
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </PopoverContent>
@@ -157,9 +163,8 @@ const InterviewForm = () => {
               </FormItem>
             )}
           />
-
+          <Button type="submit" className="mt-5">Add Interview</Button>
         </form>
-
       </Form>
     </>
   )
