@@ -11,27 +11,16 @@ import { MoreHorizontal } from "lucide-react"
 import ApplicationForm from "./ApplicationForm"
 import InterviewForm from "../interviews/InterviewForm"
 
-//experimental
 import { 
   Dialog, 
   DialogContent,
   DialogDescription, 
-  DialogHeader, 
   DialogTitle,
   DialogTrigger 
 } from "@/components/ui/dialog"
 
-import { useState } from "react"
-
-
-
-/*
-  TODO:
-    - Convert current hierarchy of components to have the dialog wrap the dropdownmenu
-      - Can use this as resource: https://github.com/radix-ui/primitives/issues/1836
-*/
 const EditApplicationMenu = () => {
-  const [open, setOpen] = useState(false)
+
   return(
     <>
 
@@ -43,6 +32,7 @@ const EditApplicationMenu = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center">
+        
           <Dialog>
             <DialogTrigger asChild>
               <DropdownMenuItem className="cursor-pointer"onSelect={(e)=>e.preventDefault()}>

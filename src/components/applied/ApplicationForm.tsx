@@ -129,46 +129,6 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
               )}
               />
             ) : (
-              // <FormField
-              //   control={form.control}
-              //   name="date"
-              //   render={({ field }) => (
-              //     <FormItem className="flex flex-col">
-              //       <FormLabel>Job Posting Date</FormLabel>
-              //         <Popover>
-              //           <PopoverTrigger asChild>
-              //             <FormControl>
-              //               <Button
-              //                 variant={"outline"}
-              //                 className={cn(
-              //                   "w-full justify-start text-left font-normal",
-              //                   !field.value && "text-muted-foreground"
-              //                 )}
-              //               >
-              //                   {field.value ? (
-              //                   format(field.value, "PPP")
-              //                 ) : (
-              //                   <span>Pick a date</span>
-              //                 )}
-              //                 <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-              //               </Button>
-              //             </FormControl>
-              //           </PopoverTrigger>
-              //           <PopoverContent className="w-auto p-0 z-[100] pointer-events-auto" align="start">
-              //             <Calendar
-              //               mode="single"
-              //               selected={field.value}
-              //               onSelect={(date => field.onChange(date||new Date()))}
-              //               disabled={(date) =>
-              //                 date > new Date() || date < new Date("1900-01-01")
-              //               }
-              //               initialFocus
-              //             />
-              //           </PopoverContent>
-              //         </Popover>
-              //     </FormItem>
-              //   )}
-              // />
               <></>
             )
           }

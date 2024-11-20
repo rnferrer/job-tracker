@@ -37,6 +37,8 @@ const InterviewForm = () => {
 
   const startHourRef = useRef<HTMLInputElement>(null)
   const startMinuteRef = useRef<HTMLInputElement>(null)
+  const endHourRef = useRef<HTMLInputElement>(null)
+  const endMinuteRef = useRef<HTMLInputElement>(null)
 
 
 
@@ -53,7 +55,7 @@ const InterviewForm = () => {
     setEndTime(time)
   }
 
-  function onSubmit(values: InterviewFormValues){
+  const onSubmit = (values: InterviewFormValues) => {
     console.log(values)
   }
   return(
@@ -102,7 +104,7 @@ const InterviewForm = () => {
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP HH:mm")
+                          format(field.value, "PPP")
                           ) : (
                             <span>Pick a date</span>
                         )}
@@ -150,22 +152,34 @@ const InterviewForm = () => {
                           />
                         </div>
                         <div>
-                          <label className="text-[14px]">
-                            End Time
-                          </label>
-                          <div className="flex items-center">
-                            <TimePickerInput
-                              picker="hours"
-                              date={endTime}
-                              setDate={setTime}
-                            />
-                            <span>:</span>
-                            <TimePickerInput
-                              picker="minutes"
-                              date={endTime}
-                              setDate={setTime}
-                            />
-                          </div>
+                        <FormField
+                            control={form.control}
+                            name="end"
+                            render={({field: endField}) => (
+                              <FormItem>
+                                <FormLabel className="text-[14px]">
+                                  Start Time
+                                </FormLabel>
+                                <div className="flex items-center">
+                                  <TimePickerInput
+                                    picker="hours"
+                                    ref={endHourRef}
+                                    date={endField.value}
+                                    setDate={endField.onChange}
+                                    onRightFocus={() => endMinuteRef.current?.focus()}
+                                  />
+                                  <span>:</span>
+                                  <TimePickerInput
+                                    picker="minutes"
+                                    ref={endMinuteRef}
+                                    date={endField.value}
+                                    setDate={endField.onChange}
+                                    onLeftFocus={() => endHourRef.current?.focus()}
+                                  />
+                                </div>
+                              </FormItem>
+                            )}
+                          />
                         </div>
                       </div>
                     </div>

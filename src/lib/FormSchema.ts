@@ -44,11 +44,11 @@ const interviewSchema = z
       }),
     date: z.date(),
     start: z.date(),
-    // end: z.string().time()
+    end: z.date()
   })
-//   .refine((data) => data.end > data.start, {
-//     message: "End time must be after start time"
-// });
+  .refine((data) => data.end > data.start, {
+    message: "End time must be after start time"
+});
 
 const applicationSchema = generalSchema.extend({
   status: z.string()
@@ -62,7 +62,8 @@ const interviewDefaultValues: InterviewFormValues = {
   job_id:"",
   title: "",
   date: new Date(),
-  start: new Date()
+  start: new Date(),
+  end: new Date()
 }
 
 const applicationDefaultValues: ApplicationFormValues = {
