@@ -43,7 +43,7 @@ const interviewSchema = z
         message: "Company title must not be longer than 50 characters.",
       }),
     date: z.date(),
-    // start: z.string().time(),
+    start: z.date(),
     // end: z.string().time()
   })
 //   .refine((data) => data.end > data.start, {
@@ -54,18 +54,15 @@ const applicationSchema = generalSchema.extend({
   status: z.string()
 });
 
-const savedSchema = generalSchema.extend({
-  date: z.date()
-});
-
 type ApplicationFormValues = z.infer<typeof applicationSchema>;
-type SavedFormValues = z.infer<typeof savedSchema>;
+type GeneralFormValues = z.infer<typeof generalSchema>;
 type InterviewFormValues = z.infer<typeof interviewSchema>;
 
 const interviewDefaultValues: InterviewFormValues = {
   job_id:"",
   title: "",
-  date: new Date()
+  date: new Date(),
+  start: new Date()
 }
 
 const applicationDefaultValues: ApplicationFormValues = {
@@ -76,12 +73,11 @@ const applicationDefaultValues: ApplicationFormValues = {
   status: "Applied"
 }
 
-const savedDefaultValues: SavedFormValues = {
+const GeneralDefaultValues: GeneralFormValues = {
   job_title:"",
   company_name:"",
   url:"",
   location:"",
-  date: new Date()
 }
 
 export {
@@ -89,12 +85,12 @@ export {
   applicationDefaultValues,
   interviewSchema,
   interviewDefaultValues,
-  savedSchema,
-  savedDefaultValues,
+  generalSchema,
+  GeneralDefaultValues,
 }
 
 export type {
   ApplicationFormValues,
-  SavedFormValues,
+  GeneralFormValues,
   InterviewFormValues
 }

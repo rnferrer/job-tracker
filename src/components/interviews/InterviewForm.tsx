@@ -22,7 +22,7 @@ import { CalendarIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { Input } from "@/components/ui/input"
-import { interviewSchema } from "@/lib/FormSchema"
+import { interviewDefaultValues, interviewSchema } from "@/lib/FormSchema"
 import { TimePickerInput } from "../timePicker/timePickerInput"
 import { useForm } from "react-hook-form"
 import { useState, useRef } from "react"
@@ -41,7 +41,8 @@ const InterviewForm = () => {
 
 
   const form = useForm<InterviewFormValues>({
-    resolver: zodResolver(interviewSchema)
+    resolver: zodResolver(interviewSchema),
+    defaultValues: interviewDefaultValues
   })
 
   const setTime = (dateInput: Date | undefined) => {
@@ -119,26 +120,36 @@ const InterviewForm = () => {
                       />
                       <div className="flex flex-col gap-3 justify-center">
                         <div>
-                          <label className="text-[14px]">Start Time</label>
-                          <div className="flex items-center">
-                            <TimePickerInput
-                              picker="hours"
-                              ref={startHourRef}
-                              date={field.value}
-                              setDate={field.onChange}
-                              onRightFocus={() => startMinuteRef.current?.focus()}
-                            />
-                            <span>:</span>
-                            <TimePickerInput
-                              picker="minutes"
-                              ref={startMinuteRef}
-                              date={field.value}
-                              setDate={field.onChange}
-                              onLeftFocus={() => startHourRef.current?.focus()}
-                            />
-                          </div>
+                          <FormField
+                            control={form.control}
+                            name="start"
+                            render={({field: startField}) => (
+                              <FormItem>
+                                <FormLabel className="text-[14px]">
+                                  Start Time
+                                </FormLabel>
+                                <div className="flex items-center">
+                                  <TimePickerInput
+                                    picker="hours"
+                                    ref={startHourRef}
+                                    date={startField.value}
+                                    setDate={startField.onChange}
+                                    onRightFocus={() => startMinuteRef.current?.focus()}
+                                  />
+                                  <span>:</span>
+                                  <TimePickerInput
+                                    picker="minutes"
+                                    ref={startMinuteRef}
+                                    date={startField.value}
+                                    setDate={startField.onChange}
+                                    onLeftFocus={() => startHourRef.current?.focus()}
+                                  />
+                                </div>
+                              </FormItem>
+                            )}
+                          />
                         </div>
-                        {/* <div>
+                        <div>
                           <label className="text-[14px]">
                             End Time
                           </label>
@@ -155,7 +166,7 @@ const InterviewForm = () => {
                               setDate={setTime}
                             />
                           </div>
-                        </div> */}
+                        </div>
                       </div>
                     </div>
                   </PopoverContent>

@@ -9,12 +9,12 @@ import { Calendar } from "@/components/ui/calendar"
 import {
   applicationSchema,
   applicationDefaultValues,
-  savedSchema,
-  savedDefaultValues,
+  generalSchema,
+  GeneralDefaultValues,
 } from "@/lib/FormSchema"
 import type {
   ApplicationFormValues,
-  SavedFormValues
+  GeneralFormValues
 } from "@/lib/FormSchema"
 import { 
   Form, 
@@ -45,15 +45,15 @@ TODO:
 */
 
 const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
-  const schema = isSavedPage ? savedSchema : applicationSchema;
-  const defaultValues = isSavedPage ? savedDefaultValues : applicationDefaultValues
+  const schema = isSavedPage ? generalSchema : applicationSchema;
+  const defaultValues = isSavedPage ? GeneralDefaultValues : applicationDefaultValues
 
-  const form = useForm<ApplicationFormValues | SavedFormValues>({
+  const form = useForm<ApplicationFormValues | GeneralFormValues>({
     resolver: zodResolver(schema),
     defaultValues
   })
 
-  function onSubmit(values: ApplicationFormValues | SavedFormValues){
+  function onSubmit(values: ApplicationFormValues | GeneralFormValues){
     console.log(values)
   }
   return(
@@ -65,7 +65,7 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
             name="job_title"
             render={({field})=>(
               <FormItem>
-                <FormLabel>Position Name</FormLabel>
+                <FormLabel>Position Title</FormLabel>
                 <FormControl>
                   <Input {...field}/>
                 </FormControl>
@@ -129,46 +129,47 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
               )}
               />
             ) : (
-              <FormField
-                control={form.control}
-                name="date"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>Job Posting Date</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant={"outline"}
-                              className={cn(
-                                "w-full justify-start text-left font-normal",
-                                !field.value && "text-muted-foreground"
-                              )}
-                            >
-                                {field.value ? (
-                                format(field.value, "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0 z-[100] pointer-events-auto" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={(date => field.onChange(date||new Date()))}
-                            disabled={(date) =>
-                              date > new Date() || date < new Date("1900-01-01")
-                            }
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover>
-                  </FormItem>
-                )}
-              />
+              // <FormField
+              //   control={form.control}
+              //   name="date"
+              //   render={({ field }) => (
+              //     <FormItem className="flex flex-col">
+              //       <FormLabel>Job Posting Date</FormLabel>
+              //         <Popover>
+              //           <PopoverTrigger asChild>
+              //             <FormControl>
+              //               <Button
+              //                 variant={"outline"}
+              //                 className={cn(
+              //                   "w-full justify-start text-left font-normal",
+              //                   !field.value && "text-muted-foreground"
+              //                 )}
+              //               >
+              //                   {field.value ? (
+              //                   format(field.value, "PPP")
+              //                 ) : (
+              //                   <span>Pick a date</span>
+              //                 )}
+              //                 <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+              //               </Button>
+              //             </FormControl>
+              //           </PopoverTrigger>
+              //           <PopoverContent className="w-auto p-0 z-[100] pointer-events-auto" align="start">
+              //             <Calendar
+              //               mode="single"
+              //               selected={field.value}
+              //               onSelect={(date => field.onChange(date||new Date()))}
+              //               disabled={(date) =>
+              //                 date > new Date() || date < new Date("1900-01-01")
+              //               }
+              //               initialFocus
+              //             />
+              //           </PopoverContent>
+              //         </Popover>
+              //     </FormItem>
+              //   )}
+              // />
+              <></>
             )
           }
           <Button type="submit" className="mt-5">Add Application</Button>
