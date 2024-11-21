@@ -76,17 +76,23 @@ const DummyJobsList = [
 const HomeSavedContent= () => {
   return(
     <div>
-      <ScrollArea className="h-[200px] w-auto">
-        <Table>
-          <TableBody>
-            {DummyJobsList.map((job, i)=>(
-              <TableRow key={i}>
-                <TableCell>{job.role} @ {job.company}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </ScrollArea>
+      { DummyJobsList.length <= 0 ? (
+        <div className="italic text-gray-400">
+          No saved jobs
+        </div>
+      ):(
+        <ScrollArea className="h-[200px] w-auto">
+          <Table>
+            <TableBody>
+              {DummyJobsList.map((job, i)=>(
+                <TableRow key={i}>
+                  <TableCell>{job.role} @ {job.company}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </ScrollArea>
+      )}
     </div>
   )
 }

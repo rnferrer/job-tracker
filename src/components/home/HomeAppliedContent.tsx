@@ -79,6 +79,13 @@ const DummyJobsList = [
 const HomeAppliedContent= () => {
   return(
     <div>
+      { DummyJobsList.length <= 0 ? (
+        <div className="italic text-gray-400">
+          No applied jobs
+        </div>
+      )
+      :
+      (
       <ScrollArea className="h-[200px] w-auto">
         <Table>
           <TableBody>
@@ -93,6 +100,9 @@ const HomeAppliedContent= () => {
           </TableBody>
         </Table>
       </ScrollArea>
+
+      )
+      }
     </div>
   )
 }

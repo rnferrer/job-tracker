@@ -4,6 +4,7 @@ import { DateSelectArg } from "@fullcalendar/core"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import FullCalendar from "@fullcalendar/react"
 import timeGridPlugin from "@fullcalendar/timegrid"
+import interactionPlugin from "@fullcalendar/interaction"
 import { useState } from "react"
 
 const InterviewCalendar = () => {
@@ -38,7 +39,7 @@ const InterviewCalendar = () => {
   return (
     <div className="w-[80%]">
       <FullCalendar
-          plugins= {[dayGridPlugin]}
+          plugins= {[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView= 'dayGridMonth'
           aspectRatio={2.4}
           fixedWeekCount={false}
