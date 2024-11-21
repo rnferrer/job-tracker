@@ -17,12 +17,12 @@ export default function DashboardLayout({
 }) {
 
   return (
-    <div className="flex flex-col w-screen p-20 relative">
+    <div className="flex flex-col w-screen px-20 py-14 relative h-[100vh]">
       <h1 className="font-bold text-5xl">Job Application Tracker</h1>
         {/* Mount the UserButton component */}
-        <div className="absolute top-5 right-5">
-          <UserButton />
-        </div>
+      <div className="absolute top-10 right-10">
+        <UserButton />
+      </div>
       <nav className="mt-[2.5rem]">
         <Tabs className="w-[1000px]" defaultValue="home">
           <TabsList className="grid w-[50%] grid-cols-4">
