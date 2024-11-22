@@ -23,7 +23,7 @@ export default function DashboardLayout({
       <div className="absolute top-10 right-10">
         <UserButton />
       </div>
-      <nav className="mt-[2.5rem]">
+      <nav className="mt-[2.4rem]">
         <Tabs className="w-[1000px]" defaultValue="home">
           <TabsList className="grid w-[50%] grid-cols-4">
             <Link href="home" >

@@ -1,6 +1,6 @@
 "use client"
 
-import InterviewCalendar from '@/components/interviews/Calendar'
+import InterviewCalendar from '@/components/interviews/InterviewCalendar'
 import type { NextPage } from 'next'
 
 const InterviewPage: NextPage = () => {

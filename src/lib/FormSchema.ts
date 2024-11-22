@@ -44,7 +44,8 @@ const interviewSchema = z
       }),
     date: z.date(),
     start: z.date(),
-    end: z.date()
+    end: z.date(),
+    allDay: z.boolean().optional()
   })
   .refine((data) => data.end > data.start, {
     message: "End time must be after start time"
@@ -62,8 +63,9 @@ const interviewDefaultValues: InterviewFormValues = {
   job_id:"",
   title: "",
   date: new Date(),
-  start: new Date(),
-  end: new Date()
+  start: new Date(new Date().setHours(0, 0, 0, 0)),
+  end: new Date(new Date().setHours(23, 59, 0, 0)),
+  allDay: true
 }
 
 const applicationDefaultValues: ApplicationFormValues = {

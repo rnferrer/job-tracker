@@ -1,6 +1,9 @@
 "use client"
 
-import { DateSelectArg } from "@fullcalendar/core"
+import { 
+  DateSelectArg,
+  EventClickArg 
+} from "@fullcalendar/core"
 import dayGridPlugin from "@fullcalendar/daygrid"
 import FullCalendar from "@fullcalendar/react"
 import timeGridPlugin from "@fullcalendar/timegrid"
@@ -28,6 +31,11 @@ const InterviewCalendar = () => {
             - A default input for the title is [Company] Interview
             - A default for the time is all day, otherwise they can put in their own times
           - User submits and a toast pops up, notifying that it has been added to the interviews
+    
+
+    WORKING SOLUTIONS
+    1. Pass props to InterviewForm to return an object to InterviewCalendar that it can use in its calendar
+    
   */ 
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<DateSelectArg | null>(null);
@@ -36,18 +44,32 @@ const InterviewCalendar = () => {
     setSelectedDate(selected);
     setIsDialogOpen(true);
   };
+
   return (
-    <div className="w-[80%]">
+    <div className="w-[80%] pt-4">
       <FullCalendar
           plugins= {[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView= 'dayGridMonth'
-          aspectRatio={2.4}
+          aspectRatio={2.3}
           fixedWeekCount={false}
+          selectable={true}
+          selectMirror={true}
           headerToolbar= {{
-            left: 'prev,next',
+            left: 'prev,next today',
             center: 'title',
-            right: 'timeGridWeek, dayGridMonth'
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
           }}
+          initialEvents={[
+            {
+              title  : 'event1',
+              start  : '2024-11-29'
+            },
+            {
+              title  : 'event2',
+              start  : '2024-11-29',
+              end    : '2024-12-1'
+            },
+          ]}
         />
     </div>
   )

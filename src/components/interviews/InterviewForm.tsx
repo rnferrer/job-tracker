@@ -6,11 +6,15 @@ import {
   Calendar
 } from "@/components/ui/calendar"
 import { 
+  Checkbox 
+} from "@/components/ui/checkbox"
+import { 
   Form, 
   FormControl, 
   FormField, 
   FormItem, 
-  FormLabel 
+  FormLabel, 
+  FormMessage
 } from "@/components/ui/form"
 import {
   Popover,
@@ -31,29 +35,21 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import type { InterviewFormValues } from "@/lib/FormSchema"
 //Use this for Datetime picking https://medium.com/@dinh.nt/create-your-own-datetime-picker-using-shadcn-409e6723225f
 const InterviewForm = () => {
-  const [date, setDate] = useState<Date | undefined>(new Date())
-  const [startTime, setStartTime] = useState<Date>()
-  const [endTime, setEndTime] = useState<Date>()
 
   const startHourRef = useRef<HTMLInputElement>(null)
   const startMinuteRef = useRef<HTMLInputElement>(null)
   const endHourRef = useRef<HTMLInputElement>(null)
   const endMinuteRef = useRef<HTMLInputElement>(null)
 
-
-
   const form = useForm<InterviewFormValues>({
     resolver: zodResolver(interviewSchema),
     defaultValues: interviewDefaultValues
   })
 
-  const setTime = (dateInput: Date | undefined) => {
-    if (!dateInput) return;
-    const time = new Date (dateInput)
-    time.setHours(dateInput.getHours())
-    time.setMinutes(dateInput.getMinutes())
-    setEndTime(time)
-  }
+  //Exposes React Hook Form and allows us to watch the field for the All day checkbox
+  const { watch } = form
+  const watchAllDay = watch("allDay", true)
+  console.log("watching checkbox: ", watchAllDay)
 
   const onSubmit = (values: InterviewFormValues) => {
     console.log(values)
@@ -137,6 +133,7 @@ const InterviewForm = () => {
                                     date={startField.value}
                                     setDate={startField.onChange}
                                     onRightFocus={() => startMinuteRef.current?.focus()}
+                                    disabled={watchAllDay}
                                   />
                                   <span>:</span>
                                   <TimePickerInput
@@ -145,6 +142,7 @@ const InterviewForm = () => {
                                     date={startField.value}
                                     setDate={startField.onChange}
                                     onLeftFocus={() => startHourRef.current?.focus()}
+                                    disabled={watchAllDay}
                                   />
                                 </div>
                               </FormItem>
@@ -158,7 +156,7 @@ const InterviewForm = () => {
                             render={({field: endField}) => (
                               <FormItem>
                                 <FormLabel className="text-[14px]">
-                                  Start Time
+                                  End Time
                                 </FormLabel>
                                 <div className="flex items-center">
                                   <TimePickerInput
@@ -167,6 +165,7 @@ const InterviewForm = () => {
                                     date={endField.value}
                                     setDate={endField.onChange}
                                     onRightFocus={() => endMinuteRef.current?.focus()}
+                                    disabled={watchAllDay}
                                   />
                                   <span>:</span>
                                   <TimePickerInput
@@ -175,8 +174,27 @@ const InterviewForm = () => {
                                     date={endField.value}
                                     setDate={endField.onChange}
                                     onLeftFocus={() => endHourRef.current?.focus()}
+                                    disabled={watchAllDay}
                                   />
                                 </div>
+                                <FormMessage/>
+                              </FormItem>
+                            )}
+                          />
+                          <FormField
+                            control={form.control}
+                            name="allDay"
+                            render={({field: allDayField}) => (
+                              <FormItem className="flex flex-row items-center">
+                                <FormControl>
+                                  <Checkbox
+                                    checked={allDayField.value}
+                                    onCheckedChange={allDayField.onChange}
+                                  />
+                                </FormControl>
+                                <FormLabel className="">
+                                  All day?
+                                </FormLabel>
                               </FormItem>
                             )}
                           />
