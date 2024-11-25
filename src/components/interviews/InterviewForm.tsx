@@ -33,7 +33,7 @@ import { useState, useRef } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import type { InterviewFormValues } from "@/lib/FormSchema"
-//Use this for Datetime picking https://medium.com/@dinh.nt/create-your-own-datetime-picker-using-shadcn-409e6723225f
+
 const InterviewForm = () => {
 
   const startHourRef = useRef<HTMLInputElement>(null)
@@ -46,7 +46,7 @@ const InterviewForm = () => {
     defaultValues: interviewDefaultValues
   })
 
-  //Exposes React Hook Form and allows us to watch the field for the All day checkbox
+  //Exposes React Hook Form and allows us to watch the field for the allDay checkbox
   const { watch } = form
   const watchAllDay = watch("allDay", true)
   console.log("watching checkbox: ", watchAllDay)

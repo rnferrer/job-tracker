@@ -2,6 +2,8 @@
 
 import { 
   DateSelectArg,
+  EventApi,
+  EventChangeArg,
   EventClickArg 
 } from "@fullcalendar/core"
 import dayGridPlugin from "@fullcalendar/daygrid"
@@ -37,6 +39,8 @@ const InterviewCalendar = () => {
     1. Pass props to InterviewForm to return an object to InterviewCalendar that it can use in its calendar
     
   */ 
+
+  const [currentEvents, setCurrentEvents] = useState<EventApi[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<DateSelectArg | null>(null);
   
@@ -45,12 +49,24 @@ const InterviewCalendar = () => {
     setIsDialogOpen(true);
   };
 
+  const handleEventClick = (selected: EventClickArg) => {
+    // Opens a dialog of non-editable info of the event
+    // Can delete or edit using buttons
+  }
+
+  const handleEventChange = (changeInfo: EventChangeArg) => {
+    // Need to add logic here to update the event info in the db
+    console.log(changeInfo)
+  }
+
   return (
     <div className="w-[80%] pt-4">
       <FullCalendar
           plugins= {[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView= 'dayGridMonth'
           aspectRatio={2.3}
+          editable={true}
+          eventChange={handleEventChange}
           fixedWeekCount={false}
           selectable={true}
           selectMirror={true}
@@ -59,17 +75,16 @@ const InterviewCalendar = () => {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
           }}
-          initialEvents={[
-            {
-              title  : 'event1',
-              start  : '2024-11-29'
-            },
-            {
-              title  : 'event2',
-              start  : '2024-11-29',
-              end    : '2024-12-1'
-            },
-          ]}
+          initialEvents={
+            // typeof window !== "undefined"
+            // ? JSON.parse(localStorage.getItem("events") || "[]")
+            // : []
+            [{
+              id: '123',
+              title: "event 1",
+              start: "2024-11-24"
+            }]
+          }
         />
     </div>
   )
