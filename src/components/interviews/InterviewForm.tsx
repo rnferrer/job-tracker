@@ -26,15 +26,17 @@ import { CalendarIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { Input } from "@/components/ui/input"
-import { interviewDefaultValues, interviewSchema } from "@/lib/FormSchema"
+import { 
+  interviewDefaultValues, 
+  interviewSchema,
+  InterviewFormValues
+} from "@/lib/FormSchema"
 import { TimePickerInput } from "../timePicker/timePickerInput"
 import { useForm } from "react-hook-form"
 import { useState, useRef } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-import type { InterviewFormValues } from "@/lib/FormSchema"
-
-const InterviewForm = () => {
+const InterviewForm = ({date}: {date:Date | undefined}) => {
 
   const startHourRef = useRef<HTMLInputElement>(null)
   const startMinuteRef = useRef<HTMLInputElement>(null)
@@ -43,7 +45,7 @@ const InterviewForm = () => {
 
   const form = useForm<InterviewFormValues>({
     resolver: zodResolver(interviewSchema),
-    defaultValues: interviewDefaultValues
+    defaultValues: {...interviewDefaultValues , date}
   })
 
   //Exposes React Hook Form and allows us to watch the field for the allDay checkbox
@@ -54,6 +56,7 @@ const InterviewForm = () => {
   const onSubmit = (values: InterviewFormValues) => {
     console.log(values)
   }
+
   return(
     <> 
       <Form {...form}>

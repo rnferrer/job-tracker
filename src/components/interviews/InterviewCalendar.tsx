@@ -1,6 +1,13 @@
 "use client"
 
 import { 
+  Dialog, 
+  DialogContent,
+  DialogDescription, 
+  DialogTitle,
+  DialogTrigger 
+} from "@/components/ui/dialog"
+import { 
   DateSelectArg,
   EventApi,
   EventChangeArg,
@@ -11,6 +18,7 @@ import FullCalendar from "@fullcalendar/react"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import interactionPlugin from "@fullcalendar/interaction"
 import { useState } from "react"
+import InterviewForm from "./InterviewForm"
 
 const InterviewCalendar = () => {
   /*
@@ -41,17 +49,24 @@ const InterviewCalendar = () => {
   */ 
 
   const [currentEvents, setCurrentEvents] = useState<EventApi[]>([])
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [isFormDialogOpen, setIsFormDialogOpen] = useState<boolean>(false);
+  const [isInfoDialogOpen, setIsInfoDialogOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<DateSelectArg | null>(null);
-  
+  const [selectedEvent, setSelectedEvent] = useState<EventClickArg | null>(null)
+
+  //This event will pass in a date and time into InterviewForm
   const handleDateClick = (selected: DateSelectArg) => {
     setSelectedDate(selected);
-    setIsDialogOpen(true);
+    setIsFormDialogOpen(true);
+    console.log(selected)
   };
 
   const handleEventClick = (selected: EventClickArg) => {
     // Opens a dialog of non-editable info of the event
     // Can delete or edit using buttons
+    console.log(selected)
+    setSelectedEvent(selected)
+    setIsInfoDialogOpen(true)
   }
 
   const handleEventChange = (changeInfo: EventChangeArg) => {
@@ -62,30 +77,49 @@ const InterviewCalendar = () => {
   return (
     <div className="w-[80%] pt-4">
       <FullCalendar
-          plugins= {[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView= 'dayGridMonth'
-          aspectRatio={2.3}
-          editable={true}
-          eventChange={handleEventChange}
-          fixedWeekCount={false}
-          selectable={true}
-          selectMirror={true}
-          headerToolbar= {{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-          }}
-          initialEvents={
-            // typeof window !== "undefined"
-            // ? JSON.parse(localStorage.getItem("events") || "[]")
-            // : []
-            [{
-              id: '123',
-              title: "event 1",
-              start: "2024-11-24"
-            }]
-          }
-        />
+        plugins= {[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        initialView= 'dayGridMonth'
+        aspectRatio={2.3}
+        editable={true}
+        eventChange={handleEventChange}
+        eventClick={handleEventClick}
+        fixedWeekCount={false}
+        select={handleDateClick}
+        selectable={true}
+        selectMirror={true}
+        headerToolbar= {{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        }}
+        initialEvents={
+          // typeof window !== "undefined"
+          // ? JSON.parse(localStorage.getItem("events") || "[]")
+          // : []
+          [{
+            id: '123',
+            title: "event 1",
+            start: "2024-11-24"
+          }]
+        }
+      />
+      <Dialog open={isInfoDialogOpen} onOpenChange={setIsInfoDialogOpen}>
+        <DialogContent>
+          <div>
+            <p>
+              {JSON.stringify(selectedEvent?.event._def)}
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isFormDialogOpen} onOpenChange={setIsFormDialogOpen}>
+        <DialogContent>
+          <InterviewForm
+            date={selectedDate.start}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
