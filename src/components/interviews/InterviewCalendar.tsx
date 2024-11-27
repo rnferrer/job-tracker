@@ -65,8 +65,23 @@ const InterviewCalendar = () => {
   const handleEventClick = (selected: EventClickArg) => {
     // Opens a dialog of non-editable info of the event
     // Can delete or edit using buttons
-    const {allDay, eventId: job_id, title, start, end} = extractDateInfo(selected)
-    setSelectedEvent({allDay, job_id, title, start, end})
+    console.log(selected)
+    const { 
+      allDay, 
+      eventId: job_id, 
+      title, 
+      start, 
+      end 
+    } = extractDateInfo(selected);
+    
+    setSelectedEvent({
+      allDay,
+      job_id,
+      title,
+      start: start || new Date(), // Fallback if start is null or undefined
+      end: end || new Date(),
+      date: start || new Date()
+    });
     setIsInfoDialogOpen(true)
   }
 
@@ -112,7 +127,9 @@ const InterviewCalendar = () => {
           [{
             id: '123',
             title: "event 1",
-            start: "2024-11-24"
+            start: "2024-11-24",
+            end: "2024-11-24",
+            
           }]
         }
       />

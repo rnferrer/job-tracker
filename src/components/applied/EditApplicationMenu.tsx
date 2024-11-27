@@ -39,14 +39,16 @@ const EditApplicationMenu = () => {
                 Add Interview
               </DropdownMenuItem>
             </DialogTrigger>
-            <DialogContent className="mt-[-9.5rem]">
+            <DialogContent className="mt-[-6rem]">
               <DialogTitle>
                 Add an interview for this job
               </DialogTitle>
               <DialogDescription>
                 Input information on the interview such as the start and end time, interview title, and any additional notes you may need. There is an overview of all your scheduled interviews in the "Interviews" tab.
               </DialogDescription>
-              <InterviewForm/>
+              <InterviewForm
+                date={new Date()}
+              />
             </DialogContent>
           </Dialog>
 

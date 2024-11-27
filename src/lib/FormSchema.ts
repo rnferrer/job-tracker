@@ -40,14 +40,18 @@ const interviewSchema = z
       .min(2,{
         message: "Interview title must be at least 2 characters.",
       }).max(50, {
-        message: "Company title must not be longer than 50 characters.",
+        message: "Interview title must not be longer than 50 characters.",
       }),
+    notes: z.string()
+    .max(500, {
+      message: "Additional notes must not exceed 500 characters."
+    }).optional(),
     date: z.date(),
     start: z.date(),
     end: z.date(),
     allDay: z.boolean().optional()
   })
-  .refine((data) => data.end > data.start, {
+  .refine((data) => data.end == null || data.start == null || data.end > data.start, {
     message: "End time must be after start time"
 });
 

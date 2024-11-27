@@ -11,6 +11,7 @@ import {
 import { 
   Form, 
   FormControl, 
+  FormDescription, 
   FormField, 
   FormItem, 
   FormLabel, 
@@ -35,6 +36,7 @@ import { TimePickerInput } from "../timePicker/timePickerInput"
 import { useForm } from "react-hook-form"
 import { useState, useRef } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Textarea } from "../ui/textarea"
 
 const InterviewForm = ({date}: {date:Date | null | undefined}) => {
 
@@ -43,9 +45,11 @@ const InterviewForm = ({date}: {date:Date | null | undefined}) => {
   const endHourRef = useRef<HTMLInputElement>(null)
   const endMinuteRef = useRef<HTMLInputElement>(null)
 
+  const [notesCounter, setNotesCounter] = useState<number>(0)
+
   const form = useForm<InterviewFormValues>({
     resolver: zodResolver(interviewSchema),
-    defaultValues: {...interviewDefaultValues , date}
+    defaultValues: {...interviewDefaultValues }
   })
 
   //Exposes React Hook Form and allows us to watch the field for the allDay checkbox
@@ -206,6 +210,26 @@ const InterviewForm = ({date}: {date:Date | null | undefined}) => {
                     </div>
                   </PopoverContent>
                 </Popover>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="notes"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Additional Notes</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    placeholder="Type any additional notes for the interview here."
+                    onChange={e => setNotesCounter(e.target.value.length)}
+                    maxLength={500}
+                    rows={5}
+                  />
+                </FormControl>
+                <FormDescription>
+                  {notesCounter}/500 characters remaining
+                </FormDescription>
               </FormItem>
             )}
           />
