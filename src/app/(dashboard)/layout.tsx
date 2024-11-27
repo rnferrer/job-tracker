@@ -9,12 +9,15 @@ import {
   UserButton
 } from "@clerk/nextjs"
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function DashboardLayout({ 
   children 
 }: { 
   children: React.ReactNode 
 }) {
+  const pathname = usePathname()
+  console.log(pathname)
 
   return (
     <div className="flex flex-col w-screen px-20 py-14 relative h-[100vh]">
@@ -24,7 +27,7 @@ export default function DashboardLayout({
         <UserButton />
       </div>
       <nav className="mt-[2.4rem]">
-        <Tabs className="w-[1000px]" defaultValue="home">
+        <Tabs className="w-[1000px]" defaultValue={pathname.slice(1)}>
           <TabsList className="grid w-[50%] grid-cols-4">
             <Link href="home" >
               <TabsTrigger value="home" className="w-full">

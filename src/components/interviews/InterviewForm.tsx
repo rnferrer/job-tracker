@@ -36,7 +36,7 @@ import { useForm } from "react-hook-form"
 import { useState, useRef } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-const InterviewForm = ({date}: {date:Date | undefined}) => {
+const InterviewForm = ({date}: {date:Date | null | undefined}) => {
 
   const startHourRef = useRef<HTMLInputElement>(null)
   const startMinuteRef = useRef<HTMLInputElement>(null)

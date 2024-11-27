@@ -19,6 +19,7 @@ import timeGridPlugin from "@fullcalendar/timegrid"
 import interactionPlugin from "@fullcalendar/interaction"
 import { useState } from "react"
 import InterviewForm from "./InterviewForm"
+import { InterviewFormValues } from "@/lib/FormSchema"
 
 const InterviewCalendar = () => {
   /*
@@ -52,7 +53,7 @@ const InterviewCalendar = () => {
   const [isFormDialogOpen, setIsFormDialogOpen] = useState<boolean>(false);
   const [isInfoDialogOpen, setIsInfoDialogOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<DateSelectArg | null>(null);
-  const [selectedEvent, setSelectedEvent] = useState<EventClickArg | null>(null)
+  const [selectedEvent, setSelectedEvent] = useState<InterviewFormValues | null>(null)
 
   //This event will pass in a date and time into InterviewForm
   const handleDateClick = (selected: DateSelectArg) => {
@@ -64,9 +65,21 @@ const InterviewCalendar = () => {
   const handleEventClick = (selected: EventClickArg) => {
     // Opens a dialog of non-editable info of the event
     // Can delete or edit using buttons
-    console.log(selected)
-    setSelectedEvent(selected)
+    const {allDay, eventId: job_id, title, start, end} = extractDateInfo(selected)
+    setSelectedEvent({allDay, job_id, title, start, end})
     setIsInfoDialogOpen(true)
+  }
+
+  const extractDateInfo = (selected: EventClickArg) => {
+    const { event } = selected;
+
+    const allDay = event.allDay; 
+    const eventId = event.id;               
+    const title = event.title;               
+    const start = event.start;
+    const end = event.end;
+
+    return({ allDay, eventId, title, start, end });
   }
 
   const handleEventChange = (changeInfo: EventChangeArg) => {
@@ -107,7 +120,7 @@ const InterviewCalendar = () => {
         <DialogContent>
           <div>
             <p>
-              {JSON.stringify(selectedEvent?.event._def)}
+              {JSON.stringify(selectedEvent)}
             </p>
           </div>
         </DialogContent>
@@ -116,7 +129,7 @@ const InterviewCalendar = () => {
       <Dialog open={isFormDialogOpen} onOpenChange={setIsFormDialogOpen}>
         <DialogContent>
           <InterviewForm
-            date={selectedDate.start}
+            date={new Date()}
           />
         </DialogContent>
       </Dialog>
