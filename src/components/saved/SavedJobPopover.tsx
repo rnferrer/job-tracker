@@ -15,7 +15,8 @@ const SavedJobPopover= () => {
           <a href="https://www.linkedin.com/feed/" target="_blank">
             <Button 
               onClick={()=>setPopoverOpen(true)}
-              className="py-2 px-4 text-xs"
+              className="text-xs"
+              size={"sm"}
             >Apply
             </Button>
           </a>

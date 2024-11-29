@@ -44,7 +44,7 @@ const EditApplicationMenu = () => {
                 Add an interview for this job
               </DialogTitle>
               <DialogDescription>
-                Input information on the interview such as the start and end time, interview title, and any additional notes you may need. There is an overview of all your scheduled interviews in the "Interviews" tab.
+                Input information about the interview such as the start/end time, interview title, and any additional notes you may need. There is an overview of all your scheduled interviews in the "Interviews" tab.
               </DialogDescription>
               <InterviewForm
                 date={new Date()}

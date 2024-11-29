@@ -4,6 +4,7 @@ import {
   Dialog, 
   DialogContent,
   DialogDescription, 
+  DialogHeader, 
   DialogTitle,
   DialogTrigger 
 } from "@/components/ui/dialog"
@@ -17,7 +18,7 @@ import dayGridPlugin from "@fullcalendar/daygrid"
 import FullCalendar from "@fullcalendar/react"
 import timeGridPlugin from "@fullcalendar/timegrid"
 import interactionPlugin from "@fullcalendar/interaction"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import InterviewForm from "./InterviewForm"
 import { InterviewFormValues } from "@/lib/FormSchema"
 
@@ -52,15 +53,17 @@ const InterviewCalendar = () => {
   const [currentEvents, setCurrentEvents] = useState<EventApi[]>([])
   const [isFormDialogOpen, setIsFormDialogOpen] = useState<boolean>(false);
   const [isInfoDialogOpen, setIsInfoDialogOpen] = useState<boolean>(false);
-  const [selectedDate, setSelectedDate] = useState<DateSelectArg | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<InterviewFormValues | null>(null)
 
   //This event will pass in a date and time into InterviewForm
   const handleDateClick = (selected: DateSelectArg) => {
-    setSelectedDate(selected);
-    setIsFormDialogOpen(true);
-    console.log(selected)
+    setSelectedDate(selected.start);
   };
+
+  useEffect(() => {
+    setIsFormDialogOpen(true)
+  }, [selectedDate])
 
   const handleEventClick = (selected: EventClickArg) => {
     // Opens a dialog of non-editable info of the event
@@ -129,7 +132,6 @@ const InterviewCalendar = () => {
             title: "event 1",
             start: "2024-11-24",
             end: "2024-11-24",
-            
           }]
         }
       />
@@ -144,9 +146,15 @@ const InterviewCalendar = () => {
       </Dialog>
 
       <Dialog open={isFormDialogOpen} onOpenChange={setIsFormDialogOpen}>
-        <DialogContent>
+        <DialogContent className="mt-[-6rem]">
+          <DialogTitle>
+            Add an interview to your calendar
+          </DialogTitle>
+          <DialogDescription>
+            Input information about the interview such as the start/end time, interview title, and any additional notes you may need. 
+          </DialogDescription>
           <InterviewForm
-            date={new Date()}
+            date={selectedDate}
           />
         </DialogContent>
       </Dialog>

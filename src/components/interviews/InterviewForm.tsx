@@ -38,22 +38,49 @@ import { useState, useRef } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Textarea } from "../ui/textarea"
 
-const InterviewForm = ({date}: {date:Date | null | undefined}) => {
+/*
+  Props needed for InterviewForm
+  - Calendar Date
+    - Has type date
+    - Optional
+    - Used when Calendar component clicks on a date
+  - Job ID
+    - Has type string (job id string?)
+    - Optional
+    - Used when Add Interview button is used on Apply page
+  - Submit function
+    - Has type callback function
+    - Optional
+    - Gets called in InterviewCalendar to return new event object
+      - Problem here is that we already have a submit function that is used to handle adding new events to db
+      - Need to show on client side that an event has been added to the calendar
+*/
+interface InterviewFormProps {
+  date?: Date,
+  job_id?: string
+}
 
-  const startHourRef = useRef<HTMLInputElement>(null)
-  const startMinuteRef = useRef<HTMLInputElement>(null)
-  const endHourRef = useRef<HTMLInputElement>(null)
-  const endMinuteRef = useRef<HTMLInputElement>(null)
+const InterviewForm = (props: InterviewFormProps) => {
 
-  const [notesCounter, setNotesCounter] = useState<number>(0)
+  const { date, job_id} = props;
+
+  const startHourRef = useRef<HTMLInputElement>(null);
+  const startMinuteRef = useRef<HTMLInputElement>(null);
+  const endHourRef = useRef<HTMLInputElement>(null);
+  const endMinuteRef = useRef<HTMLInputElement>(null);
+
+  const [notesCounter, setNotesCounter] = useState<number>(0);
+
+  if (date) { interviewDefaultValues.date = date };
+  if (job_id) { interviewDefaultValues.job_id = job_id };
 
   const form = useForm<InterviewFormValues>({
     resolver: zodResolver(interviewSchema),
     defaultValues: {...interviewDefaultValues }
-  })
+  });
 
   //Exposes React Hook Form and allows us to watch the field for the allDay checkbox
-  const { watch } = form
+  const { watch } = form;
   const watchAllDay = watch("allDay", true)
   console.log("watching checkbox: ", watchAllDay)
 
@@ -197,9 +224,10 @@ const InterviewForm = ({date}: {date:Date | null | undefined}) => {
                                   <Checkbox
                                     checked={allDayField.value}
                                     onCheckedChange={allDayField.onChange}
+                                    className="mt-2"
                                   />
                                 </FormControl>
-                                <FormLabel className="">
+                                <FormLabel className="ml-1">
                                   All day?
                                 </FormLabel>
                               </FormItem>
@@ -210,6 +238,7 @@ const InterviewForm = ({date}: {date:Date | null | undefined}) => {
                     </div>
                   </PopoverContent>
                 </Popover>
+                <FormMessage/>
               </FormItem>
             )}
           />
