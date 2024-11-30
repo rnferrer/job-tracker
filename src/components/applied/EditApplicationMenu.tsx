@@ -19,7 +19,17 @@ import {
   DialogTrigger 
 } from "@/components/ui/dialog"
 
-const EditApplicationMenu = () => {
+interface EditAppMenuProps {
+  job: {
+    job_title?: string,
+    company_name?: string,
+    url?: string,
+    location?: string,
+    status?: "Applied" | "Interview" | "NoResponse" | "Offer" | "Rejected"
+  }
+}
+
+const EditApplicationMenu = (props:EditAppMenuProps) => {
 
   return(
     <>
@@ -59,7 +69,7 @@ const EditApplicationMenu = () => {
               </DropdownMenuItem>
             </DialogTrigger>
             <DialogContent>
-              <ApplicationForm isSavedPage={false}/>
+              <ApplicationForm/>
             </DialogContent>
           </Dialog>
 

@@ -56,13 +56,13 @@ import { Textarea } from "../ui/textarea"
       - Need to show on client side that an event has been added to the calendar
 */
 interface InterviewFormProps {
-  date?: Date,
-  job_id?: string
+  date?: Date | null,
+  job_id?: string | null
 }
 
 const InterviewForm = (props: InterviewFormProps) => {
 
-  const { date, job_id} = props;
+  const { date = new Date(), job_id} = props;
 
   const startHourRef = useRef<HTMLInputElement>(null);
   const startMinuteRef = useRef<HTMLInputElement>(null);
@@ -76,7 +76,7 @@ const InterviewForm = (props: InterviewFormProps) => {
 
   const form = useForm<InterviewFormValues>({
     resolver: zodResolver(interviewSchema),
-    defaultValues: {...interviewDefaultValues }
+    defaultValues: { ...interviewDefaultValues }
   });
 
   //Exposes React Hook Form and allows us to watch the field for the allDay checkbox
@@ -85,6 +85,7 @@ const InterviewForm = (props: InterviewFormProps) => {
   console.log("watching checkbox: ", watchAllDay)
 
   const onSubmit = (values: InterviewFormValues) => {
+    //When sending to backend, need to attach a Last_edited value to the data
     console.log(values)
   }
 

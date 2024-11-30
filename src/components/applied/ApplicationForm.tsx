@@ -1,11 +1,7 @@
 "use client"
-import { CalendarIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { format } from "date-fns"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
 import {
   applicationSchema,
   applicationDefaultValues,
@@ -25,17 +21,13 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { 
-  Popover, 
-  PopoverContent, 
-  PopoverTrigger 
-} from "@/components/ui/popover"
-import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select"
+import { usePathname } from "next/navigation"
 
 /*
 TODO:
@@ -44,18 +36,28 @@ TODO:
     - Make the 'Status' field on Applied page conditional based on the current path
 */
 
-const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
-  const schema = isSavedPage ? generalSchema : applicationSchema;
-  const defaultValues = isSavedPage ? GeneralDefaultValues : applicationDefaultValues
+interface ApplicationFormProps {
+  job_title?: string,
+  company_name?: string,
+  url?: string,
+  location?: string,
+  status?: "Applied" | "Interview" | "NoResponse" | "Offer" | "Rejected"
+}
+
+const ApplicationForm = (props: ApplicationFormProps) => {
+  const pathname = usePathname();
+  const schema = (pathname == '/saved') ? generalSchema : applicationSchema;
+  const defaultValues = (pathname == '/saved') ? GeneralDefaultValues : applicationDefaultValues;
 
   const form = useForm<ApplicationFormValues | GeneralFormValues>({
     resolver: zodResolver(schema),
     defaultValues
-  })
+  });
 
   function onSubmit(values: ApplicationFormValues | GeneralFormValues){
     console.log(values)
-  }
+  };
+
   return(
     <div>
       <Form {...form}>
@@ -104,7 +106,7 @@ const ApplicationForm = ({isSavedPage}:{isSavedPage:boolean}) => {
                 </FormControl>
               </FormItem>
           )}/>
-          {!isSavedPage ? (
+          {pathname == '/applied' ? (
               <FormField
               control={form.control}
               name="status"

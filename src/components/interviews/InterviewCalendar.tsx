@@ -59,10 +59,10 @@ const InterviewCalendar = () => {
   //This event will pass in a date and time into InterviewForm
   const handleDateClick = (selected: DateSelectArg) => {
     setSelectedDate(selected.start);
+    setIsFormDialogOpen(true)
   };
 
   useEffect(() => {
-    setIsFormDialogOpen(true)
   }, [selectedDate])
 
   const handleEventClick = (selected: EventClickArg) => {
@@ -124,9 +124,6 @@ const InterviewCalendar = () => {
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         }}
         initialEvents={
-          // typeof window !== "undefined"
-          // ? JSON.parse(localStorage.getItem("events") || "[]")
-          // : []
           [{
             id: '123',
             title: "event 1",

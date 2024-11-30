@@ -56,7 +56,7 @@ const interviewSchema = z
 });
 
 const applicationSchema = generalSchema.extend({
-  status: z.string()
+  status: z.enum(["Applied", "Interview", "NoResponse", "Offer", "Rejected"])
 });
 
 type ApplicationFormValues = z.infer<typeof applicationSchema>;
