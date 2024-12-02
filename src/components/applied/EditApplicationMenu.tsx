@@ -18,6 +18,7 @@ import {
   DialogTitle,
   DialogTrigger 
 } from "@/components/ui/dialog"
+import { useState } from "react"
 
 interface EditAppMenuProps {
   job: {
@@ -30,6 +31,7 @@ interface EditAppMenuProps {
 }
 
 const EditApplicationMenu = (props:EditAppMenuProps) => {
+  const [isInterviewOpen, setIsInterviewOpen] = useState<boolean>(false)
 
   return(
     <>
@@ -43,7 +45,7 @@ const EditApplicationMenu = (props:EditAppMenuProps) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="center">
         
-          <Dialog>
+          <Dialog open={isInterviewOpen} onOpenChange={setIsInterviewOpen}>
             <DialogTrigger asChild>
               <DropdownMenuItem className="cursor-pointer"onSelect={(e)=>e.preventDefault()}>
                 Add Interview
@@ -58,6 +60,7 @@ const EditApplicationMenu = (props:EditAppMenuProps) => {
               </DialogDescription>
               <InterviewForm
                 date={new Date()}
+                setDialog={setIsInterviewOpen}
               />
             </DialogContent>
           </Dialog>

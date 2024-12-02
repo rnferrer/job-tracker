@@ -152,6 +152,7 @@ const InterviewCalendar = () => {
           </DialogDescription>
           <InterviewForm
             date={selectedDate}
+            setDialog={setIsFormDialogOpen}
           />
         </DialogContent>
       </Dialog>

@@ -37,6 +37,7 @@ import { useForm } from "react-hook-form"
 import { useState, useRef } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Textarea } from "../ui/textarea"
+import { useToast } from "@/components/ui/hooks/use-toast"
 
 /*
   Props needed for InterviewForm
@@ -57,12 +58,19 @@ import { Textarea } from "../ui/textarea"
 */
 interface InterviewFormProps {
   date?: Date | null,
-  job_id?: string | null
+  job_id?: string | null,
+  setDialog: (value:boolean) => void
 }
 
 const InterviewForm = (props: InterviewFormProps) => {
 
-  const { date = new Date(), job_id} = props;
+  const { 
+    date = new Date(), 
+    job_id,
+    setDialog
+  } = props;
+
+  const {toast} = useToast()
 
   const startHourRef = useRef<HTMLInputElement>(null);
   const startMinuteRef = useRef<HTMLInputElement>(null);
@@ -74,9 +82,11 @@ const InterviewForm = (props: InterviewFormProps) => {
   if (date) { interviewDefaultValues.date = date };
   if (job_id) { interviewDefaultValues.job_id = job_id };
 
+  //initialize form
   const form = useForm<InterviewFormValues>({
     resolver: zodResolver(interviewSchema),
     defaultValues: { ...interviewDefaultValues }
+    
   });
 
   //Exposes React Hook Form and allows us to watch the field for the allDay checkbox
@@ -87,6 +97,7 @@ const InterviewForm = (props: InterviewFormProps) => {
   const onSubmit = (values: InterviewFormValues) => {
     //When sending to backend, need to attach a Last_edited value to the data
     console.log(values)
+    setDialog(false);
   }
 
   return(
@@ -263,7 +274,17 @@ const InterviewForm = (props: InterviewFormProps) => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="mt-5">Add Interview</Button>
+          <Button 
+            type="submit" 
+            className="mt-5"
+            onClick={()=>{
+              toast({
+                description:"Interview has been added"
+              })
+            }}
+          >
+            Add Interview
+          </Button>
         </form>
       </Form>
     </>
