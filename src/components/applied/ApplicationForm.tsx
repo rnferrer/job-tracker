@@ -27,6 +27,7 @@ import { ApplicationFormProps } from "@/lib/interfaces"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { usePathname } from "next/navigation"
+import { filterProps } from "@/lib/utils"
 
 /*
 TODO:
@@ -40,9 +41,11 @@ const ApplicationForm = (props: ApplicationFormProps) => {
   const schema = (pathname == '/saved') ? generalSchema : applicationSchema;
   const defaultValues = (pathname == '/saved') ? GeneralDefaultValues : applicationDefaultValues;
 
+  const filteredProps = filterProps(props)
+
   const form = useForm<ApplicationFormValues | GeneralFormValues>({
     resolver: zodResolver(schema),
-    defaultValues
+    defaultValues: {...defaultValues, ...filteredProps}
   });
 
   function onSubmit(values: ApplicationFormValues | GeneralFormValues){

@@ -8,9 +8,6 @@ import {
   DropdownMenuTrigger
 } from "../ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
-import ApplicationForm from "./ApplicationForm"
-import InterviewForm from "../interviews/InterviewForm"
-
 import { 
   Dialog, 
   DialogContent,
@@ -20,18 +17,20 @@ import {
 } from "@/components/ui/dialog"
 import { useState } from "react"
 
+import { ApplicationFormValues } from "@/lib/FormSchema"
+import { filterProps } from  "@/lib/utils"
+import ApplicationForm from "./ApplicationForm"
+import InterviewForm from "../interviews/InterviewForm"
+
 interface EditAppMenuProps {
-  job: {
-    job_title?: string,
-    company_name?: string,
-    url?: string,
-    location?: string,
-    status?: "Applied" | "Interview" | "NoResponse" | "Offer" | "Rejected"
-  }
+  job: Omit<ApplicationFormValues, "last_edited">
 }
 
 const EditApplicationMenu = (props:EditAppMenuProps) => {
   const [isInterviewOpen, setIsInterviewOpen] = useState<boolean>(false)
+
+  const job = filterProps(props.job) as Omit<ApplicationFormValues, "last_edited">;
+  console.log(job)
 
   return(
     <>
@@ -72,7 +71,13 @@ const EditApplicationMenu = (props:EditAppMenuProps) => {
               </DropdownMenuItem>
             </DialogTrigger>
             <DialogContent>
-              <ApplicationForm/>
+              <ApplicationForm
+                job_title={job.job_title}
+                company_name={job.company_name}
+                url={job.url}
+                location={job.location}
+                status={job.status}
+              />
             </DialogContent>
           </Dialog>
 

@@ -58,8 +58,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 const InterviewForm = (props: InterviewFormProps) => {
 
-  const { setDialog, ...propsCopy } = props;
-  const filteredProps = filterProps(propsCopy)
+  const { setDialog } = props;
+  const filteredProps = filterProps(props)
 
   const {toast} = useToast()
 
