@@ -1,13 +1,7 @@
 "use client"
-import { 
-  Button 
-} from "@/components/ui/button"
-import {
-  Calendar
-} from "@/components/ui/calendar"
-import { 
-  Checkbox 
-} from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import { Checkbox } from "@/components/ui/checkbox"
 import { 
   Form, 
   FormControl, 
@@ -17,27 +11,32 @@ import {
   FormLabel, 
   FormMessage
 } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-
+import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/components/ui/hooks/use-toast"
 import { CalendarIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { 
+  cn,
+  filterProps
+} from "@/lib/utils"
 import { format } from "date-fns"
-import { Input } from "@/components/ui/input"
 import { 
   interviewDefaultValues, 
   interviewSchema,
   InterviewFormValues
 } from "@/lib/FormSchema"
+import {
+  InterviewFormProps
+} from "@/lib/interfaces"
 import { TimePickerInput } from "../timePicker/timePickerInput"
 import { useForm } from "react-hook-form"
 import { useState, useRef } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Textarea } from "../ui/textarea"
-import { useToast } from "@/components/ui/hooks/use-toast"
 
 /*
   Props needed for InterviewForm
@@ -56,19 +55,11 @@ import { useToast } from "@/components/ui/hooks/use-toast"
       - Problem here is that we already have a submit function that is used to handle adding new events to db
       - Need to show on client side that an event has been added to the calendar
 */
-interface InterviewFormProps {
-  date?: Date | null,
-  job_id?: string | null,
-  setDialog: (value:boolean) => void
-}
 
 const InterviewForm = (props: InterviewFormProps) => {
 
-  const { 
-    date = new Date(), 
-    job_id,
-    setDialog
-  } = props;
+  const { setDialog, ...propsCopy } = props;
+  const filteredProps = filterProps(propsCopy)
 
   const {toast} = useToast()
 
@@ -79,13 +70,10 @@ const InterviewForm = (props: InterviewFormProps) => {
 
   const [notesCounter, setNotesCounter] = useState<number>(0);
 
-  if (date) { interviewDefaultValues.date = date };
-  if (job_id) { interviewDefaultValues.job_id = job_id };
-
   //initialize form
   const form = useForm<InterviewFormValues>({
     resolver: zodResolver(interviewSchema),
-    defaultValues: { ...interviewDefaultValues }
+    defaultValues: { ...interviewDefaultValues, ...filteredProps }
   });
 
   //Exposes React Hook Form and allows us to watch the field for the allDay checkbox

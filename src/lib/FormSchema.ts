@@ -22,7 +22,9 @@ const generalSchema = z.object({
       message: "Location must be at least 2 characters.",
     }).max(50, {
       message: "Location must not be longer than 50 characters.",
-    })
+    }),
+  //FOR NOW THIS WILL BE A STRING LATER DECIDED TO BE A DATE OBJECT OR NOT
+  last_edited: z.string()
 })
 
 const interviewSchema = z
@@ -73,6 +75,7 @@ const interviewDefaultValues: InterviewFormValues = {
 }
 
 const applicationDefaultValues: ApplicationFormValues = {
+  last_edited: new Date().toDateString(),
   job_title:"",
   company_name:"",
   url:"",
@@ -81,6 +84,7 @@ const applicationDefaultValues: ApplicationFormValues = {
 }
 
 const GeneralDefaultValues: GeneralFormValues = {
+  last_edited: new Date().toDateString(),
   job_title:"",
   company_name:"",
   url:"",

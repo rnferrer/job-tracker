@@ -1,17 +1,5 @@
 "use client"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
-import {
-  applicationSchema,
-  applicationDefaultValues,
-  generalSchema,
-  GeneralDefaultValues,
-} from "@/lib/FormSchema"
-import type {
-  ApplicationFormValues,
-  GeneralFormValues
-} from "@/lib/FormSchema"
 import { 
   Form, 
   FormControl, 
@@ -27,6 +15,17 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select"
+import {
+  applicationSchema,
+  applicationDefaultValues,
+  generalSchema,
+  GeneralDefaultValues,
+  ApplicationFormValues,
+  GeneralFormValues
+} from "@/lib/FormSchema"
+import { ApplicationFormProps } from "@/lib/interfaces"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { usePathname } from "next/navigation"
 
 /*
@@ -35,14 +34,6 @@ TODO:
     - Remove 'Job Posted' field
     - Make the 'Status' field on Applied page conditional based on the current path
 */
-
-interface ApplicationFormProps {
-  job_title?: string,
-  company_name?: string,
-  url?: string,
-  location?: string,
-  status?: "Applied" | "Interview" | "NoResponse" | "Offer" | "Rejected"
-}
 
 const ApplicationForm = (props: ApplicationFormProps) => {
   const pathname = usePathname();
@@ -55,6 +46,7 @@ const ApplicationForm = (props: ApplicationFormProps) => {
   });
 
   function onSubmit(values: ApplicationFormValues | GeneralFormValues){
+    values.last_edited = new Date().toISOString()
     console.log(values)
   };
 

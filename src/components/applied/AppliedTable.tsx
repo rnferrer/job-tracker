@@ -9,23 +9,15 @@ import {
   TableRow 
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "../ui/button"
-import { ExternalLinkIcon, MoreHorizontal } from "lucide-react"
-import EditApplicationMenu from "./EditApplicationMenu"
+import { ExternalLinkIcon } from "lucide-react"
 
-type AppliedJob = {
-  last_edited: string,
-  status: string, //can convert this to an int for easier storage
-  role: string,
-  company:string,
-  job_link: string,
-  location: string
-};
+import EditApplicationMenu from "./EditApplicationMenu"
+import { ApplicationFormValues } from "@/lib/FormSchema"
 
 const AppliedTable = ({
   DummyJobsList
 }: {
-  DummyJobsList: AppliedJob[]
+  DummyJobsList: ApplicationFormValues[]
 }) => {
   return(
     <div>
@@ -42,14 +34,14 @@ const AppliedTable = ({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {DummyJobsList.map((job:AppliedJob, i:number)=>(
+          {DummyJobsList.map((job:ApplicationFormValues, i:number)=>(
             <TableRow className="cursor-default" key={i}>
               <TableCell>{job.last_edited}</TableCell>
               <TableCell>
                 <Badge>{job.status}</Badge>
               </TableCell>
-              <TableCell>{job.role}</TableCell>
-              <TableCell>{job.company}</TableCell>
+              <TableCell>{job.job_title}</TableCell>
+              <TableCell>{job.company_name}</TableCell>
               <TableCell className="ml-5 w-auto">
                 <a href="https://www.linkedin.com/feed/" target="_blank">
                   <ExternalLinkIcon size={16}/>
@@ -57,7 +49,9 @@ const AppliedTable = ({
               </TableCell>
               <TableCell>{job.location}</TableCell>
               <TableCell>
-                <EditApplicationMenu/>
+                <EditApplicationMenu
+                  job={job}
+                />
               </TableCell>
             </TableRow>
           ))}

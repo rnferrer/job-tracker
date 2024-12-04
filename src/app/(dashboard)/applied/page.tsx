@@ -9,73 +9,75 @@ import {
   DialogTitle,
   DialogTrigger 
 } from "@/components/ui/dialog"
+import { ApplicationFormValues } from "@/lib/FormSchema"
 import ApplicationForm  from "@/components/applied/ApplicationForm"
 import AppliedTable from "@/components/applied/AppliedTable"
 import type { NextPage } from 'next'
 
-const DummyJobsList = [
+
+const DummyJobsList:ApplicationFormValues[] = [
   {
     last_edited: "May 23, 2024 5:00PM",
     status: "Rejected", //can convert this to an int for easier storage
-    role: "Frontend Software Engineer",
-    company:"Amazon",
-    job_link: "LinkedIn",
+    job_title: "Frontend Software Engineer",
+    company_name:"Amazon",
+    url: "LinkedIn",
     location: "San Francisco, US"
   },
   {
     last_edited: "May 24, 2024 5:00PM",
     status: "Applied", 
-    role: "Backend Software Engineer",
-    company:"Google",
-    job_link: "LinkedIn",
+    job_title: "Backend Software Engineer",
+    company_name:"Google",
+    url: "LinkedIn",
     location: "San Francisco, US"
   },
   {
     last_edited: "May 22, 2024 5:00PM",
     status: "Interview", 
-    role: "Software Engineer",
-    company:"LinkedIn",
-    job_link: "LinkedIn",
+    job_title: "Software Engineer",
+    company_name:"LinkedIn",
+    url: "LinkedIn",
     location: "San Francisco, US"
   },
   {
     last_edited: "May 21, 2024 5:00PM",
     status: "Offer", 
-    role: "Full-stack Software Engineer",
-    company:"Netflix",
-    job_link: "LinkedIn",
+    job_title: "Full-stack Software Engineer",
+    company_name:"Netflix",
+    url: "LinkedIn",
     location: "San Francisco, US"
   },
   {
     last_edited: "May 19, 2024 5:00PM",
     status: "Applied", 
-    role: "Software Engineer",
-    company:"Figma",
-    job_link: "Wellfound",
+    job_title: "Software Engineer",
+    company_name:"Figma",
+    url: "Wellfound",
     location: "San Francisco, US"
   },
   {
     last_edited: "May 8, 2024 5:00PM",
     status: "Applied", 
-    role: "Software Engineer",
-    company:"Crunchyroll",
-    job_link: "LinkedIn",
+    job_title: "Software Engineer",
+    company_name:"Crunchyroll",
+    url: "LinkedIn",
     location: "San Francisco, US"
   },
   {
     last_edited: "May 7, 2024 5:00PM",
     status: "Applied", 
-    role: "Software Engineer",
-    company:"YouTube",
-    job_link: "LinkedIn",
+    job_title: "Software Engineer",
+    company_name:"YouTube",
+    url: "LinkedIn",
     location: "San Francisco, US"
   },
   {
     last_edited: "May 3, 2024 5:00PM",
     status: "Applied", 
-    role: "Software Engineer",
-    company:"Github",
-    job_link: "LinkedIn",
+    job_title: "Software Engineer",
+    company_name:"Github",
+    url: "LinkedIn",
     location: "San Francisco, US"
   }
 ]
@@ -101,10 +103,10 @@ const AppliedPage: NextPage = () => {
               Add a new job you have applied to
             </DialogTitle>
             <DialogDescription>
-              Input information about the job such as the title, company name, and location of where the position is held. Once added, you can edit the information at a later time.
+              Input information about the job such as the title, company_name name, and location of where the position is held. Once added, you can edit the information at a later time.
             </DialogDescription>
           </DialogHeader>
-          <ApplicationForm isSavedPage={false}/>
+          <ApplicationForm/>
         </DialogContent>
       </Dialog>
     </div>
