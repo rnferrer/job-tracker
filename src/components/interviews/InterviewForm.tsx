@@ -86,7 +86,6 @@ const InterviewForm = (props: InterviewFormProps) => {
   const form = useForm<InterviewFormValues>({
     resolver: zodResolver(interviewSchema),
     defaultValues: { ...interviewDefaultValues }
-    
   });
 
   //Exposes React Hook Form and allows us to watch the field for the allDay checkbox
@@ -137,7 +136,6 @@ const InterviewForm = (props: InterviewFormProps) => {
                 <FormLabel className="">Date & Time</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
-          
                       <Button
                         variant={"outline"}
                         className={cn(

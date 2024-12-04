@@ -5,8 +5,7 @@ import type { NextPage } from 'next'
 const SignInPage:NextPage = () => {
   return(
     <div className="h-screen flex justify-center items-center">
-      <SignIn></SignIn>
-      
+      <SignIn/>
     </div>
   )
 }
