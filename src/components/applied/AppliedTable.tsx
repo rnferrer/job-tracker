@@ -13,6 +13,12 @@ import { ExternalLinkIcon } from "lucide-react"
 
 import EditApplicationMenu from "./EditApplicationMenu"
 import { ApplicationFormValues } from "@/lib/FormSchema"
+import { ColumnDef } from "@tanstack/react-table"
+
+interface AppliedTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
+}
 
 const AppliedTable = ({
   DummyJobsList
