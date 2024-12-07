@@ -24,7 +24,6 @@ const generalSchema = z.object({
       message: "Location must not be longer than 50 characters.",
     }),
   //FOR NOW THIS WILL BE A STRING LATER DECIDED TO BE A DATE OBJECT OR NOT
-  last_edited: z.string()
 })
 
 const interviewSchema = z
@@ -58,11 +57,17 @@ const interviewSchema = z
 });
 
 const applicationSchema = generalSchema.extend({
-  status: z.enum(["Applied", "Interview", "NoResponse", "Offer", "Rejected"])
+  status: z.enum(["Applied", "Interview", "NoResponse", "Offer", "Rejected"]),
+  last_edited: z.string()
 });
+
+const savedSchema = generalSchema.extend({
+  save_date: z.string()
+})
 
 type ApplicationFormValues = z.infer<typeof applicationSchema>;
 type GeneralFormValues = z.infer<typeof generalSchema>;
+type SavedFormValues = z.infer<typeof savedSchema>;
 type InterviewFormValues = z.infer<typeof interviewSchema>;
 
 const interviewDefaultValues: InterviewFormValues = {
@@ -84,7 +89,6 @@ const applicationDefaultValues: ApplicationFormValues = {
 }
 
 const GeneralDefaultValues: GeneralFormValues = {
-  last_edited: new Date().toDateString(),
   job_title:"",
   company_name:"",
   url:"",
@@ -103,5 +107,6 @@ export {
 export type {
   ApplicationFormValues,
   GeneralFormValues,
-  InterviewFormValues
+  InterviewFormValues,
+  SavedFormValues
 }

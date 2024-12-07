@@ -13,6 +13,8 @@ import { ApplicationFormValues } from "@/lib/FormSchema"
 import ApplicationForm  from "@/components/applied/ApplicationForm"
 import AppliedTable from "@/components/applied/AppliedTable"
 import type { NextPage } from 'next'
+import { DataTable } from "@/components/DataTable"
+import { appliedColumns } from "@/lib/columnTypes"
 
 
 const DummyJobsList:ApplicationFormValues[] = [
@@ -92,7 +94,11 @@ const AppliedPage: NextPage = () => {
   
   return(
     <div className="relative">
-      <AppliedTable DummyJobsList={DummyJobsList}/>
+      {/* <AppliedTable DummyJobsList={DummyJobsList}/> */}
+      {/*
+      Need to add column here with the last edited time
+      */}
+      <DataTable data={DummyJobsList} columns={appliedColumns}/>
       <Dialog>
         <DialogTrigger asChild>
           <Button>Add New Application</Button>
