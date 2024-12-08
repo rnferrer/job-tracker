@@ -24,6 +24,10 @@ export type AppliedColumns = GeneralColumn & {
 
 export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
   {
+    accessorKey: "last_edited",
+    header: "Last Edit"
+  },
+  {
     accessorKey: "job_title",
     header: "Role"
   },

@@ -37,7 +37,7 @@ const interviewSchema = z
       .max(50, {
         message: "Job ID is invalid."
       }),
-    title: z.string()
+    job_title: z.string()
       .min(2,{
         message: "Interview title must be at least 2 characters.",
       }).max(50, {
@@ -70,9 +70,11 @@ type GeneralFormValues = z.infer<typeof generalSchema>;
 type SavedFormValues = z.infer<typeof savedSchema>;
 type InterviewFormValues = z.infer<typeof interviewSchema>;
 
+
+//Can maybe remove date field
 const interviewDefaultValues: InterviewFormValues = {
   job_id:"",
-  title: "",
+  job_title: "",
   date: new Date(),
   start: new Date(new Date().setHours(0, 0, 0, 0)),
   end: new Date(new Date().setHours(23, 59, 0, 0)),

@@ -5,7 +5,8 @@ import {
   FormControl, 
   FormField, 
   FormItem, 
-  FormLabel 
+  FormLabel, 
+  FormMessage
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { 
@@ -88,6 +89,7 @@ const ApplicationForm = (props: ApplicationFormProps) => {
                 <FormControl>
                   <Input {...field}/>
                 </FormControl>
+                <FormMessage/>
               </FormItem>
           )}/>
           <FormField
@@ -99,6 +101,7 @@ const ApplicationForm = (props: ApplicationFormProps) => {
                 <FormControl>
                   <Input {...field}/>
                 </FormControl>
+                <FormMessage/>
               </FormItem>
           )}/>
           {pathname == '/applied' ? (

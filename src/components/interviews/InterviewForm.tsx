@@ -106,7 +106,7 @@ const InterviewForm = (props: InterviewFormProps) => {
           />
           <FormField
             control={form.control}
-            name="title"
+            name="job_title"
             render={({field}) => (
               <FormItem className="mt-2">
                 <FormLabel>Title</FormLabel>
