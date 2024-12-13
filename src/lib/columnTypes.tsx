@@ -3,6 +3,7 @@ import  EditApplicationMenu  from "@/components/applied/EditApplicationMenu"
 import { ExternalLinkIcon } from "lucide-react"
 import { ApplicationFormValues } from "./FormSchema"
 import SavedJobPopover from "@/components/saved/SavedJobPopover"
+import { Badge } from "@/components/ui/badge"
 
 //Need to include Saved here also
 
@@ -53,7 +54,14 @@ export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status"
+    header: "Status",
+    cell: ({row}) => {
+      return(
+        <Badge>
+          {row.original.status}
+        </Badge>
+      )
+    }
   },
   // {
   //   accessorKey: "job_title",
