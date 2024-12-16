@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog"
 import { ApplicationFormValues } from "@/lib/FormSchema"
 import ApplicationForm  from "@/components/applied/ApplicationForm"
-import AppliedTable from "@/components/applied/AppliedTable"
 import type { NextPage } from 'next'
 import { DataTable } from "@/components/DataTable"
 import { appliedColumns } from "@/lib/columnTypes"
@@ -81,7 +80,47 @@ const DummyJobsList:ApplicationFormValues[] = [
     company_name:"Github",
     url: "LinkedIn",
     location: "San Francisco, US"
-  }
+  },
+  {
+    last_edited: "May 23, 2024 5:00PM",
+    status: "Rejected", //can convert this to an int for easier storage
+    job_title: "Frontend Software Engineer",
+    company_name:"Amazon",
+    url: "LinkedIn",
+    location: "San Francisco, US"
+  },
+  {
+    last_edited: "May 24, 2024 5:00PM",
+    status: "Applied", 
+    job_title: "Backend Software Engineer",
+    company_name:"Google",
+    url: "LinkedIn",
+    location: "San Francisco, US"
+  },
+  {
+    last_edited: "May 22, 2024 5:00PM",
+    status: "Interview", 
+    job_title: "Software Engineer",
+    company_name:"LinkedIn",
+    url: "LinkedIn",
+    location: "San Francisco, US"
+  },
+  {
+    last_edited: "May 21, 2024 5:00PM",
+    status: "Offer", 
+    job_title: "Full-stack Software Engineer",
+    company_name:"Netflix",
+    url: "LinkedIn",
+    location: "San Francisco, US"
+  },
+  {
+    last_edited: "May 19, 2024 5:00PM",
+    status: "Applied", 
+    job_title: "Software Engineer",
+    company_name:"Figma",
+    url: "Wellfound",
+    location: "San Francisco, US"
+  },
 ]
 
 /*
@@ -101,7 +140,7 @@ const AppliedPage: NextPage = () => {
       <DataTable data={DummyJobsList} columns={appliedColumns}/>
       <Dialog>
         <DialogTrigger asChild>
-          <Button>Add New Application</Button>
+          <Button className="mt-3">Add New Application</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
