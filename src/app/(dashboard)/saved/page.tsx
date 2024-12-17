@@ -79,6 +79,41 @@ const DummyJobsList:SavedFormValues[] = [
     company_name:"Github",
     url: "LinkedIn",
     location: "San Francisco, US"
+  },
+  {
+    save_date: "May 21, 2024 5:00PM",
+    job_title: "Full-stack Software Engineer",
+    company_name:"Netflix",
+    url: "LinkedIn",
+    location: "San Francisco, US"
+  },
+  {
+    save_date: "May 19, 2024 5:00PM",
+    job_title: "Software Engineer",
+    company_name:"Figma",
+    url: "Wellfound",
+    location: "San Francisco, US"
+  },
+  {
+    save_date: "May 8, 2024 5:00PM",
+    job_title: "Software Engineer",
+    company_name:"Crunchyroll",
+    url: "LinkedIn",
+    location: "San Francisco, US"
+  },
+  {
+    save_date: "May 7, 2024 5:00PM",
+    job_title: "Software Engineer",
+    company_name:"YouTube",
+    url: "LinkedIn",
+    location: "San Francisco, US"
+  },
+  {
+    save_date: "May 3, 2024 5:00PM",
+    job_title: "Software Engineer",
+    company_name:"Github",
+    url: "LinkedIn",
+    location: "San Francisco, US"
   }
 ]
 

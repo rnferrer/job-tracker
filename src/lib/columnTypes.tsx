@@ -26,7 +26,8 @@ export type AppliedColumns = GeneralColumn & {
 export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
   {
     accessorKey: "last_edited",
-    header: "Last Edit"
+    header: "Last Edit",
+    size: 275
   },
   {
     accessorKey: "job_title",
@@ -81,7 +82,8 @@ export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
 export const savedColumns: ColumnDef<SavedColumns>[] = [
   {
     accessorKey: "save_date",
-    header: "Date Saved"
+    header: "Date Saved",
+    size: 200
   },
   {
     accessorKey: "job_title",

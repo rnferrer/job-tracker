@@ -40,14 +40,22 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="rounded-md border">
+      <div className="rounded-md border h-[570px]">
         <Table>
-          <TableHeader>
+          <TableHeader
+>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead 
+                      key={header.id}
+                      style={{
+                        minWidth: header.column.columnDef.size,
+                        maxWidth: header.column.columnDef.size,
+                        maxHeight: 65
+                      }}
+                    >
                       {flexRender(
                         header.column.columnDef.header,
                         header.getContext()
@@ -66,7 +74,12 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) =>
-                    <TableCell key={cell.id}>
+                    <TableCell 
+                      key={cell.id}
+                      style={{
+                        maxHeight:65
+                      }}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell, 
                         cell.getContext()
