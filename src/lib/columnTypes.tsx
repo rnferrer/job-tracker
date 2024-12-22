@@ -1,9 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table"
 import  EditApplicationMenu  from "@/components/applied/EditApplicationMenu"
-import { ExternalLinkIcon } from "lucide-react"
+import { ArrowUpDown, ExternalLinkIcon } from "lucide-react"
 import { ApplicationFormValues } from "./FormSchema"
 import SavedJobPopover from "@/components/saved/SavedJobPopover"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 //Need to include Saved here also
 
@@ -26,8 +27,19 @@ export type AppliedColumns = GeneralColumn & {
 export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
   {
     accessorKey: "last_edited",
-    header: "Last Edit",
-    size: 275
+    header: ({column}) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Last Edited
+          <ArrowUpDown className="ml-2 h-4 w-4"/>
+        </Button>
+      )
+    },
+    size: 275,
+    enableColumnFilter: false 
   },
   {
     accessorKey: "job_title",
@@ -47,7 +59,8 @@ export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
           <ExternalLinkIcon size={16}/>
         </a>
       )
-    }
+    },
+    enableGlobalFilter: false
   },
   {
     accessorKey: "location",
@@ -64,10 +77,6 @@ export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
       )
     }
   },
-  // {
-  //   accessorKey: "job_title",
-  //   header: "Last Edited"
-  // },
   {
     id: "actions",
     cell: ({row}) => {
@@ -75,7 +84,8 @@ export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
       return (
         <EditApplicationMenu job={job}/>
       )
-    }
+    },
+    enableGlobalFilter: false
   }
 ]
 

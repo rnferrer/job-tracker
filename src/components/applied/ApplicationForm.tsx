@@ -50,7 +50,7 @@ const ApplicationForm = (props: ApplicationFormProps) => {
   });
 
   function onSubmit(values: ApplicationFormValues | GeneralFormValues){
-    values.last_edited = new Date().toISOString()
+    // values.last_edited = new Date().toISOString()
     console.log(values)
   };
 

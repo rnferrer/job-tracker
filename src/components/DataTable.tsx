@@ -1,10 +1,17 @@
 import {
   ColumnDef,
+  ColumnFiltersState,
+  SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import {
+  Input
+} from "@/components/ui/input"
 import {
   Table,
   TableBody,
@@ -14,6 +21,15 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "./ui/button"
+import { useState } from "react"
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -24,26 +40,60 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>){
-  //For some reason pagination is changing the padding and cell widths are inconsistent
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = useState<any>([])
+  const [filterSelection, setFilterSelection] = useState<string>("job_title")
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    state:{
+      sorting,
+      columnFilters
+    },
     initialState: {
       pagination: {
         pageSize: 8, //default page size
       }
     }
   })
-  
 
   return (
     <div>
+      <div className="flex flex-row items-center">
+
+        <Input
+          placeholder="Search Jobs..."
+          value={(table.getColumn(filterSelection)?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>{
+            table.getColumn(filterSelection)?.setFilterValue(event.target.value)
+          }}
+          className="max-w-sm my-5"
+        >
+        
+        </Input>
+        <Select
+          onValueChange={(value) => setFilterSelection(value)}
+        >
+          <SelectTrigger className="h-[40px] w-[150px] ml-1">
+            <SelectValue placeholder="Filter by"/>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="job_title">Role</SelectItem>
+            <SelectItem value="company_name">Company Name</SelectItem>
+            <SelectItem value="location">Location</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
       <div className="rounded-md border h-[570px]">
         <Table>
-          <TableHeader
->
+          <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
