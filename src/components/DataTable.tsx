@@ -1,6 +1,5 @@
 import {
   ColumnDef,
-  ColumnFiltersState,
   SortingState,
   flexRender,
   getCoreRowModel,
@@ -9,6 +8,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import { 
+  Button 
+} from "./ui/button"
 import {
   Input
 } from "@/components/ui/input"
@@ -20,8 +22,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "./ui/button"
-import { useState } from "react"
 import { 
   Select,
   SelectContent,
@@ -30,6 +30,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { 
+  useState 
+} from "react"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]

@@ -23,7 +23,6 @@ const generalSchema = z.object({
     }).max(50, {
       message: "Location must not be longer than 50 characters.",
     }),
-  //FOR NOW THIS WILL BE A STRING LATER DECIDED TO BE A DATE OBJECT OR NOT
 })
 
 const interviewSchema = z
