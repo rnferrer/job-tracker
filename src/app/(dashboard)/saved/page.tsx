@@ -126,6 +126,11 @@ const DummyJobsList:SavedFormValues[] = [
       - after clicking yes on the toast, the toast needs to disappear 
       - also the job you just applied to, the job itself has to disappear and a toast confirms the addition to the applied data/page
       - then when you click on the applied tab again, the newly applied job will be added to the top(or bottom) of the job list
+  - Queries needed for applied page
+    - (query) Get applications
+    - (mutation) Create application
+    - (mutation) Edit application
+    - (mutation) Delete Application
       
 */
 const SavedJobsPage: NextPage = () => {

@@ -127,6 +127,12 @@ const DummyJobsList:ApplicationFormValues[] = [
 TODO:
 - after adding a new application, add it to the job list and db
 - Allow for the status of the application to be editable through hovering and selecting
+- Queries needed for applied page
+  - (query) Get applications
+  - (mutation) Create application
+  - (mutation) Edit application
+  - (mutation) Delete Application
+  - (mutation) From saved page, when a job gets applied to create application
 */
 
 const AppliedPage: NextPage = () => {
