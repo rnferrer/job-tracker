@@ -14,6 +14,8 @@ import ApplicationForm  from "@/components/applied/ApplicationForm"
 import type { NextPage } from 'next'
 import { DataTable } from "@/components/DataTable"
 import { appliedColumns } from "@/lib/columnTypes"
+import { useQuery } from "@tanstack/react-query"
+import { fetchAppliedJobs } from "@/api/queries/useFetchData"
 
 
 const DummyJobsList:ApplicationFormValues[] = [
@@ -136,14 +138,18 @@ TODO:
 */
 
 const AppliedPage: NextPage = () => {
-  
+
+  const query = useQuery({
+    queryKey:['applied', 1],
+    queryFn: fetchAppliedJobs
+  })
+
   return(
     <div className="relative">
-      {/* <AppliedTable DummyJobsList={DummyJobsList}/> */}
-      {/*
-      Need to add column here with the last edited time
-      */}
-      <DataTable data={DummyJobsList} columns={appliedColumns}/>
+      {/* <div>
+        {JSON.stringify(query.data)}
+      </div> */}
+      <DataTable data={query.data} columns={appliedColumns}/>
       <Dialog>
         <DialogTrigger asChild>
           <Button className="mt-3">Add New Application</Button>

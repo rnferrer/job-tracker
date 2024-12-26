@@ -42,11 +42,11 @@ export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
     enableColumnFilter: false 
   },
   {
-    accessorKey: "job_title",
+    accessorKey: "jobTitle",
     header: "Role"
   },
   {
-    accessorKey: "company_name",
+    accessorKey: "companyName",
     header: "Company"
   },
   {
