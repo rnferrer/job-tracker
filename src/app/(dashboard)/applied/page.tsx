@@ -143,6 +143,9 @@ const AppliedPage: NextPage = () => {
     queryKey:['applied', 1],
     queryFn: fetchAppliedJobs
   })
+  if (query.isPending){
+    return <span>Loading...</span>
+  }
 
   return(
     <div className="relative">

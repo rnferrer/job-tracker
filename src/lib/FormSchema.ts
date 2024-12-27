@@ -56,7 +56,7 @@ const interviewSchema = z
 });
 
 const applicationSchema = generalSchema.extend({
-  status: z.enum(["Applied", "Interview", "NoResponse", "Offer", "Rejected"]),
+  status: z.enum(["APPLIED","INTERVIEW","OFFER","REJECTED", "NORESPONSE"]),
   last_edited: z.string()
 });
 
@@ -86,7 +86,7 @@ const applicationDefaultValues: ApplicationFormValues = {
   company_name:"",
   url:"",
   location:"",
-  status: "Applied"
+  status: "APPLIED"
 }
 
 const GeneralDefaultValues: GeneralFormValues = {

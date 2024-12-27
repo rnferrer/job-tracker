@@ -3,8 +3,9 @@ import axiosInstance from "../axiosInstance";
 //Applied Page Functions
 export async function fetchAppliedJobs ({ queryKey }: any) {
   const [_, userId] = queryKey
-  const response = await axiosInstance.get(`/applied/${userId}`);
-  return response.data
+  const response = await fetch(`http://localhost:8000/applied/${userId}`);
+  const data = await response.json()
+  return data
 }
 
 //Saved Page Functions

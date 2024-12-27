@@ -20,7 +20,7 @@ export type SavedColumns = GeneralColumn & {
 }
 
 export type AppliedColumns = GeneralColumn & {
-  status: "Applied" | "Interview" | "Offer" | "Rejected",
+  status: "APPLIED" | "INTERVIEW" | "OFFER" | "REJECTED",
   last_edit: Date
 }
 
@@ -39,14 +39,27 @@ export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
       )
     },
     size: 275,
-    enableColumnFilter: false 
+    cell: ({row}) => {
+      //Source: https://stackoverflow.com/questions/4829569/parsing-iso-8601-date-in-javascript
+      let edit_time = row.original.last_edited
+      let months:any = {Jan:"January", Feb:"February", Mar:"March", Apr:"April", May:"May", Jun:"June", Jul:"July", Aug:"August", Sep:"September", Oct:"October", Nov:"November", Dec:"December"}
+      let formatted = String(new Date(edit_time)).replace(
+      /\w{3} (\w{3}) (\d{2}) (\d{4}) (\d{2}):(\d{2}):[^(]+\(([A-Z]{3})\)/,
+        function($0,$1,$2,$3,$4,$5,$6){
+          return months[$1]+" "+$2+", "+$3+" - "+$4%12+":"+$5+(+$4>12?"PM":"AM")+" "+$6 
+      }).slice(4, 33)
+
+      return(
+        <p>{formatted}</p>
+      )
+    }
   },
   {
-    accessorKey: "jobTitle",
+    accessorKey: "job_title",
     header: "Role"
   },
   {
-    accessorKey: "companyName",
+    accessorKey: "company_name",
     header: "Company"
   },
   {
@@ -70,9 +83,26 @@ export const appliedColumns: ColumnDef<ApplicationFormValues>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({row}) => {
+      let status
+      switch(row.original.status){
+        case "APPLIED":
+          status = "Applied";
+          break;
+        case "INTERVIEW":
+          status = "Interview";
+          break;
+        case "NORESPONSE":
+          status = "No Response";
+          break;
+        case "OFFER":
+          status = "Offer";
+          break;
+        case "REJECTED":
+          status = "Rejected"
+      }
       return(
         <Badge>
-          {row.original.status}
+          {status}
         </Badge>
       )
     }
