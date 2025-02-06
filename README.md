@@ -1,4 +1,4 @@
-# Job Tracker
+# Project Name
 
 ## Getting Started
 
@@ -32,8 +32,12 @@ Follow these steps to set up and run this project locally.
       ```
 
 3. **Run the application**
+
    ```sh
    npm run dev
    ```
+
+4. **Clone the Job Tracker Server repository**
+   Go to the [Job Tracker Server repository](https://github.com/rnferrer/job-tracker-server) and clone it to have the full application working.
 
 Your application should now be running locally!
