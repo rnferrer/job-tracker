@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Job Tracker
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to set up and run this project locally.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js installed on your machine
+- A Clerk account
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Download dependencies**
 
-## Learn More
+   ```sh
+   npm i
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Set up Clerk authentication**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   1. Create a [Clerk](https://clerk.com/) account and set up a project for this application.
+   2. Retrieve your **publishable key** and **secret key** from the Clerk dashboard.
+   3. Define the following environment variables in a `.env.local` file:
+      ```env
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
+      CLERK_SECRET_KEY=your_secret_key
+      NEXT_PUBLIC_CLERK_SIGN_IN_URL=your_sign_in_url
+      NEXT_PUBLIC_CLERK_SIGN_UP_URL=your_sign_up_url
+      NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=your_after_sign_in_url
+      NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=your_after_sign_up_url
+      ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. **Run the application**
+   ```sh
+   npm run dev
+   ```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Your application should now be running locally!
